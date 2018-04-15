@@ -1,0 +1,113 @@
+// http://ionicframework.com/docs/theming/
+
+.black{
+	background:black;
+}
+
+.titleText{
+	overflow:auto;
+	text-overflow:visible;
+	text-align:center;
+	margin-top:-14vw;
+	height:15vw !important;
+}
+
+.title{
+	
+	float:center;
+}
+
+.card{
+	height:10vw;
+}
+
+.LGU{
+	font-size:7vw !important;
+}
+
+.animation{
+	height:55vw;
+}
+
+.progress{
+	height:3vw;
+	width:75%;
+}
+
+.start{
+	background-color:#26de81;
+	font-size:6vw;
+	height:12vw;
+}
+
+.stop{
+	background-color:#fc5c65;
+	font-size:6vw;
+	height:12vw;
+}
+
+.topmargin{
+	margin-top:0.5vw !important;
+}
+
+.logo{
+	height:12vw;
+}
+
+.scroll-content{
+	margin-top:15vw !important;
+	height:80vh !important;
+}
+
+.searchbar{
+	width:100%;
+}
+
+.filter{
+	margin-right:15% !important;
+	width: 30vw !important;
+}
+
+.half{
+	width:100%;
+	background-color:white !important;
+	border:1px #8c7ae6 solid !important;
+}
+
+.log{
+	height:14vw;
+}
+
+.logg{
+	height:8vw;
+}
+
+.logs{
+	color:#8c7ae6 !important;
+}
+
+.sent{
+	color:#26de81;
+}
+
+.fail{
+	color:#fc5c65;
+}
+
+.hidden{
+	display:none;
+}
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.

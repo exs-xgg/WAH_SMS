@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <img class="logo" alt="wah logo" src="../../assets/imgs/wah.png">
+    <ion-title class="titleText">
+    WAH-SPASMS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-center padding has-tabs="true">
+  <ion-card class="card">
+    <p class="LGU">Gerona RHU 1</p>
+  </ion-card>
+
+  <div id="stopped" class="hidden">
+    <img class="animation" alt="spasms animation" src="../../assets/imgs/smsstopped.png">
+    <h4>SPASMS service has stopped</h4>
+    <h6>please press the Start button to <br>resume the service</h6>
+    <br>
+    <button ion-button icon-left class="start" (click)="showError()">
+      <ion-icon name="play"></ion-icon>
+      Start
+      </button>
+  </div>
+
+   <div id="error" class="hidden">
+    <img class="animation" alt="spasms animation" src="../../assets/imgs/smserror.png">
+    <h4>Error! SPASMS cannot connect <br> to the server</h4>
+    <h6>please press the Start button to retry</h6>
+    <br>
+    <button ion-button icon-left class="start" (click)="showError()">
+      <ion-icon name="play"></ion-icon>
+      Start
+      </button>
+  </div>
+
+  <div id="standby">
+    <img class="animation" alt="spasms animation" src="../../assets/imgs/smsstandby.gif">
+    <h4>SPASMS is waiting for new <br> messages from server</h4>
+    <br>
+    <button ion-button icon-left class="stop" (click)="showStopped()">
+      <ion-icon name="square"></ion-icon>
+      Stop
+    </button>
+  </div>
+
+  <div id="sending" class="hidden">
+    <img class="animation" alt="spasms animation" src="../../assets/imgs/smssending.gif">
+    <h4>SPASMS is sending messages</h4>
+ 
+    <img class="progress" alt="spasms animation" src="../../assets/imgs/progressbar.gif">
+    <!-- <h6>8 out of 8 finished</h6> -->
+  
+    <br>
+    <button ion-button icon-left class="stop" (click)="showStopped()">
+      <ion-icon name="square" ></ion-icon>
+      Stop
+    </button>
+  </div>
+
+  <div id="finished" class="hidden">
+    <img class="animation" alt="spasms animation" src="../../assets/imgs/smsfinished.png">
+    <h4>SPASMS has finished sending<br> messages</h4>
+ 
+    <h6>5 out of 8 were sent successfully</h6>
+  
+    <br>
+    <button ion-button icon-left class="stop" (click)="showStopped()">
+      <ion-icon name="square" ></ion-icon>
+      Stop
+    </button>
+  </div>
+
+
+</ion-content>
+

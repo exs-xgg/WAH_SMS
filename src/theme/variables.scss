@@ -34,8 +34,8 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #45aaf2,
-  secondary:  #8c7ae6,
+  primary:    #8c7ae6,
+  secondary:  #45aaf2,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
@@ -54,22 +54,38 @@ $colors: (
 // Material Design only Sass variables can go here
 
 
-$toolbar-ios-title-font-size: 9vw;
-$toolbar-md-title-font-size : 9vw;
-$toolbar-wp-title-font-size : 9vw;
+$toolbar-ios-title-font-size: 8vw;
+$toolbar-md-title-font-size : 8vw;
+$toolbar-wp-title-font-size : 8vw;
 
-$toolbar-ios-height	:15vw;
-$toolbar-md-height	:15vw;
-$toolbar-wp-height	:15vw;
+$toolbar-ios-height	:12vw;
+$toolbar-md-height	:12vw;
+$toolbar-wp-height	:12vw;
 
-$tabs-tab-color-active: #8c7ae6;
+$tabs-ios-tab-font-size:6vw;
+$tabs-md-tab-font-size:6vw;
+$tabs-wp-tab-font-size:6vw;
 
-$tabs-ios-tab-font-size: 8vw;
-$tabs-ios-tab-icon-size: 10vw;
+$tabs-ios-tab-icon-size:10vw;
+$tabs-md-tab-icon-size:10vw;
+$tabs-wp-tab-icon-size:10vw;
 
-$card-ios-header-color: #8c7ae6;
+$searchbar-md-input-height:12vw;
+$searchbar-ios-input-height:12vw;
+$searchbar-wp-input-height:12vw;
 
-$button-ios-font-size:	7vw;
+$searchbar-ios-input-search-icon-size:7vw;
+$searchbar-md-input-search-icon-size:7vw;
+$searchbar-wp-input-search-icon-size:7vw;
+
+$searchbar-md-input-search-icon-color:#8c7ae6;
+$searchbar-ios-input-height:12vw;
+$searchbar-md-input-height:12vw;
+$searchbar-wp-input-height:12vw;
+
+$searchbar-md-input-border-radius:2px;
+
+
 
 // App Windows Variables
 // --------------------------------------------------
