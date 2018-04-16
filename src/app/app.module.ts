@@ -7,6 +7,8 @@ import { HelpPage } from '../pages/help/help';
 import { LogsPage } from '../pages/logs/logs';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CompleteModal } from '../pages/complete/complete';
+import { ResultsModal } from '../pages/results/results';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,11 +19,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HelpPage,
     LogsPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    CompleteModal,
+    ResultsModal,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,7 +33,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HelpPage,
     LogsPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    CompleteModal,
+    ResultsModal,
   ],
   providers: [
     StatusBar,
