@@ -37,4 +37,8 @@ export class HomePage{
   showError(){
     this.page.showError();
   }
+
+  onBack(){
+    this.page.showStandby();
+  }
 }
