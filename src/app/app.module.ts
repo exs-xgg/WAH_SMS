@@ -12,6 +12,7 @@ import { ResultsModal } from '../pages/results/results';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { PageServiceProvider } from '../providers/pageservice/pageservice';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PageServiceProvider
   ]
 })
 export class AppModule {}

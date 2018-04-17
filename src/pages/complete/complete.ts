@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { IonicPage } from 'ionic-angular';
+import { PageServiceProvider } from '../../providers/pageservice/pageservice';
+import { ModalController,NavController} from 'ionic-angular';
 
 /**
  * Generated class for the CompleteModalPage page.
@@ -14,13 +15,17 @@ import { HomePage } from '../home/home';
   selector: 'complete',
   templateUrl: 'complete.html',
 })
+
 export class CompleteModal {
 
-  constructor() {
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController) {
   }
+  
+  page = new PageServiceProvider(this.modalCtrl);
 
   onBack(){
-    HomePage.showStandby();
+    this.page.showStandby();
+    this.navCtrl.pop();
   }
 
   ionViewDidLoad() {
