@@ -23,15 +23,20 @@ export class PageServiceProvider {
   public presentComepleteModal() {
     let completeModal = this.modalCtrl.create(CompleteModal);
     completeModal.present();
+    //this.presentComepleteModal(); sa method na tatawag sa modal
   }
 
   showFinished(){
+    document.getElementById('error').style.display = "none";
+    document.getElementById('stopped').style.display ="none";
     document.getElementById('sending').style.display = "none";
-    this.presentComepleteModal();
+    document.getElementById('finished').style.display ="block";    
   }
 
   showStandby(){
     document.getElementById('error').style.display = "none";
+    document.getElementById('finished').style.display ="none";
+    document.getElementById('stopped').style.display ="none";
     document.getElementById('standby').style.display = "block";
   }
 
@@ -43,6 +48,7 @@ export class PageServiceProvider {
 
   showError(){
     document.getElementById('sending').style.display = "none";
+    document.getElementById('finished').style.display = "none";
     document.getElementById('standby').style.display = "none";
     document.getElementById('stopped').style.display = "none";
     document.getElementById('error').style.display = "block";
