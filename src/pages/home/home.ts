@@ -41,4 +41,8 @@ export class HomePage{
   onBack(){
     this.page.showStandby();
   }
+
+  onViewResults(){
+    this.page.presentCompleteModal();
+  }
 }

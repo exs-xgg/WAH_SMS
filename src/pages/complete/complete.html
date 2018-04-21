@@ -1,15 +1,17 @@
-<ion-header>
-  <ion-navbar color="secondary">
-    <img class="logo" alt="wah logo" src="../../assets/imgs/wah.png">
-    <ion-title class="titleText">
-    WAH-SPASMS</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content text-center padding has-tabs="true">
+<ion-content class="main-view" text-center>
+	<div class="overlay"></div>
+	<div class="modal_content">
   <ion-card class="card">
-    <p class="LGU">Gerona RHU 1</p>
+    <p class="LGU">Results</p>
   </ion-card>
+
+    <button ion-button icon-left (click)="onBack()">
+      <ion-icon name="done-all" ></ion-icon>
+      Back
+    </button>
+  
+
+</div>
 
 </ion-content>
 
