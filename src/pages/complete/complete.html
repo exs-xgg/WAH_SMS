@@ -1,15 +1,26 @@
-<ion-header>
-  <ion-navbar color="secondary">
-    <img class="logo" alt="wah logo" src="../../assets/imgs/wah.png">
-    <ion-title class="titleText">
-    WAH-SPASMS</ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-content class="main-view">
+	<div class="overlay"></div>
+	<div class="modal_content">
+  <ion-card color="secondary" text-center>
 
-<ion-content text-center padding has-tabs="true">
-  <ion-card class="card">
-    <p class="LGU">Gerona RHU 1</p>
-  </ion-card>
+    <p class="LGU">Results</p>
 
+     </ion-card>
+   <ion-card class="results" text-center>
+    	<h5>Congratulations! You've sent <br>8 messages today! </h5>
+    	<br>
+    	<h5>Sent Messages: 8 messages</h5>
+    	<h5>Failed Messages: 0 messages </h5>
+
+  
+
+ 
+    <button ion-button icon-left (click)="onBack()">
+      <ion-icon name="done-all" ></ion-icon>
+      Back
+    </button>
+     </ion-card>
+
+</div>
 </ion-content>
 

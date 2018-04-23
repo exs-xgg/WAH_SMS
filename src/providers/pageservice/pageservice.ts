@@ -20,10 +20,9 @@ export class PageServiceProvider {
     document.getElementById('sending').style.display = "block";
   }
 
-  public presentComepleteModal() {
+  public presentCompleteModal() {
     let completeModal = this.modalCtrl.create(CompleteModal);
     completeModal.present();
-    //this.presentComepleteModal(); sa method na tatawag sa modal
   }
 
   showFinished(){
