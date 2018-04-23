@@ -1,6 +1,8 @@
 import { Component} from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { PageServiceProvider } from '../../providers/pageservice/pageservice';
+import { SmsSenderProvider } from '../../providers/sms-sender/sms-sender';
+import { SMS } from '@ionic-native/sms';
 
 @Component({
   selector: 'page-home',
@@ -9,10 +11,11 @@ import { PageServiceProvider } from '../../providers/pageservice/pageservice';
 
 export class HomePage{
 
-  constructor(public modalCtrl: ModalController) {
+  constructor(public modalCtrl: ModalController,public sms: SMS) {
   }
 
   page = new PageServiceProvider(this.modalCtrl);
+  sender = new SmsSenderProvider(this.sms);
 
   ngOnInit(){
     this.page.showStandby();
@@ -20,6 +23,10 @@ export class HomePage{
 
   showStandby(){
     this.page.showStandby();
+  }
+
+  Send(){
+    this.sender.Send();
   }
 
   showSending(){
@@ -40,5 +47,9 @@ export class HomePage{
 
   onBack(){
     this.page.showStandby();
+  }
+
+  onViewResults(){
+    this.page.presentCompleteModal();
   }
 }

@@ -28,8 +28,4 @@ export class CompleteModal {
     this.navCtrl.pop();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CompleteModal');
-  }
-
 }

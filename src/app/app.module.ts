@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { SMS } from '@ionic-native/sms';
 
 import { HelpPage } from '../pages/help/help';
 import { LogsPage } from '../pages/logs/logs';
@@ -13,6 +14,7 @@ import { ResultsModal } from '../pages/results/results';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PageServiceProvider } from '../providers/pageservice/pageservice';
+import { SmsSenderProvider } from '../providers/sms-sender/sms-sender';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { PageServiceProvider } from '../providers/pageservice/pageservice';
     TabsPage,
     CompleteModal,
     ResultsModal,
+    SMS,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { PageServiceProvider } from '../providers/pageservice/pageservice';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PageServiceProvider
+    PageServiceProvider,
+    SmsSenderProvider,
   ]
 })
 export class AppModule {}
