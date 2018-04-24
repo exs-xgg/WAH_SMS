@@ -25,7 +25,6 @@ import { SmsSenderProvider } from '../providers/sms-sender/sms-sender';
     TabsPage,
     CompleteModal,
     ResultsModal,
-    SMS,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +46,7 @@ import { SmsSenderProvider } from '../providers/sms-sender/sms-sender';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PageServiceProvider,
     SmsSenderProvider,
+    SMS,
   ]
 })
 export class AppModule {}

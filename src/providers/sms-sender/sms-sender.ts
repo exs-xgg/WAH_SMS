@@ -14,7 +14,7 @@ export class SmsSenderProvider {
   constructor(private sms: SMS) {}
 
   public Send(){
-    this.sms.send('09295868987', 'Testing');
+    this.sms.send('09177995739', 'This is a text message sent from WAH-SPASMS');
   }
 
 }
