@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="secondary">
-    <img class="logo" alt="wah logo" src="../../assets/imgs/wah.png">
+    <img class="logo" alt="wah logo" src="assets/imgs/wah.png">
     <ion-title class="titleText">
     WAH-SPASMS</ion-title>
   </ion-navbar>
@@ -12,7 +12,7 @@
   </ion-card>
 
   <div id="stopped" class="hidden">
-    <img class="animation" alt="spasms animation" src="../../assets/imgs/smsstopped.png">
+    <img class="animation" alt="spasms animation" src="assets/imgs/smsstopped.png">
     <h5>SPASMS service has stopped</h5>
     <h6>please press the Start button to <br>resume the service</h6>
     <br>
@@ -23,7 +23,7 @@
   </div>
 
   <div id="error" class="hidden">
-    <img class="animation" alt="spasms animation" src="../../assets/imgs/smserror.png">
+    <img class="animation" alt="spasms animation" src="assets/imgs/smserror.png">
     <h5>Error! SPASMS cannot connect <br> to the server</h5>
     <h6>please press the Start button to retry</h6>
     <br>
@@ -34,24 +34,24 @@
   </div>
 
   <div id="standby">
-    <img class="animation" alt="spasms animation" src="../../assets/imgs/smsstandby.gif">
+    <img class="animation" alt="spasms animation" src="assets/imgs/smsstandby.gif">
     <h5>SPASMS is waiting for new <br> messages from server</h5>
     <br>
     <button ion-button icon-left class="stop" (click)="showStopped()">
       <ion-icon name="square"></ion-icon>
       Stop
     </button>
-    <button ion-button icon-left class="start" (click)="Send()">
+    <button ion-button icon-left class="start" (click)="Send();showSending()">
       <ion-icon name="play"></ion-icon>
       Next
     </button>
   </div>
 
   <div id="sending" class="hidden">
-    <img class="animation" alt="spasms animation" src="../../assets/imgs/smssending.gif">
+    <img class="animation" alt="spasms animation" src="assets/imgs/smssending.gif">
     <h5>SPASMS is sending messages</h5>
  
-    <img class="progress" alt="spasms animation" src="../../assets/imgs/progressbar.gif">
+    <img class="progress" alt="spasms animation" src="assets/imgs/progressbar.gif">
     <h6>8 out of 8 finished</h6>
   
     <br>
@@ -66,7 +66,7 @@
   </div>
 
   <div id="finished">
-    <img class="animation" alt="spasms animation" src="../../assets/imgs/smsfinished.png">
+    <img class="animation" alt="spasms animation" src="assets/imgs/smsfinished.png">
     <h4>SPASMS has finished sending<br> messages</h4>
     <br>
     <button ion-button icon-left class="start" (click)="onViewResults()">
