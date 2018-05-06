@@ -35,15 +35,11 @@
 
   <div id="standby">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsstandby.gif">
-    <h5>SPASMS is waiting for new <br> messages from server</h5>
+    <h5>{{num}}</h5>
     <br>
     <button ion-button icon-left class="stop" (click)="showStopped()">
       <ion-icon name="square"></ion-icon>
       Stop
-    </button>
-    <button ion-button icon-left class="start" (click)="Send();showSending()">
-      <ion-icon name="play"></ion-icon>
-      Next
     </button>
   </div>
 

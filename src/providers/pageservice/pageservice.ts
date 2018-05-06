@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ModalController, NavParams } from 'ionic-angular';
 import { CompleteModal } from '../../pages/complete/complete';
-
-
+import { HomePage } from '../../pages/home/home';
 /*
   Generated class for the PagecontrolProvider provider.
 
@@ -13,8 +12,9 @@ import { CompleteModal } from '../../pages/complete/complete';
 @Injectable()
 export class PageServiceProvider {
 
-  constructor(public modalCtrl: ModalController,) {}
+  constructor(public modalCtrl: ModalController) {}
 
+ 
   public showSending(){
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
@@ -23,6 +23,11 @@ export class PageServiceProvider {
   public presentCompleteModal() {
     let completeModal = this.modalCtrl.create(CompleteModal);
     completeModal.present();
+  }
+
+  add(num){
+    num=num+1;
+    return num;
   }
 
   showFinished(){

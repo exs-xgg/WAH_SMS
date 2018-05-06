@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { HTTP } from '@ionic-native/http';
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs';
-
+import 'rxjs/add/operator/map';
+import { SmsSenderProvider } from '../../providers/sms-sender/sms-sender';
+import { PageServiceProvider } from '../../providers/pageservice/pageservice';
+import { SMS } from '@ionic-native/sms';
+import { ModalController } from 'ionic-angular';
 /*
   Generated class for the SmsControllerProvider provider.
 
@@ -12,33 +13,31 @@ import { Observable } from 'rxjs';
 */
 @Injectable()
 export class SmsControllerProvider {
-  data="";
+ 
+constructor(public http: HttpClient, public sms:SMS,public modalCtrl: ModalController) {
+}
 
-  constructor(public http: HttpClient) {
-    console.log('Hello SmsControllerProvider Provider');
+json;
+sender = new SmsSenderProvider(this.sms);
+page = new PageServiceProvider(this.modalCtrl);
+
+getRemoteData(){
+  this.http.get('http://api.randomuser.me/?results=1&noinfo').subscribe(data => {
+      this.json=data;
+      alert(JSON.parse(JSON.stringify(data["Results"].gender)));
+      this.checkRemoteData(data);
+  });
+}
+
+checkRemoteData(data){
+  if (data.toString==""){
+    setTimeout(() => { 
+      console.log('nothing new');
+      this.getRemoteData();}, 4000); 
+  }else{
+    this.sender.Send(data.toString);
+    this.page.showSending();
   }
+}
 
-  
-
-  load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
-    }
-  
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular HTTP provider to request the data,
-      // then on the response, it'll map the JSON data to a parsed JS object.
-      // Next, we process the data and resolve the promise with the new data.
-      this.http.get('https://randomuser.me/api/?results=10')
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data.results;
-          resolve(this.data);
-        });
-    });
-  }
 }

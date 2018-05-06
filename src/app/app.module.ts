@@ -1,8 +1,11 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import { HttpClientModule} from '@angular/common/http';
 import { MyApp } from './app.component';
 import { SMS } from '@ionic-native/sms';
+import { HttpClient } from '@angular/common/http';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 import { HelpPage } from '../pages/help/help';
 import { LogsPage } from '../pages/logs/logs';
@@ -29,6 +32,7 @@ import { SmsControllerProvider } from '../providers/sms-controller/sms-controlle
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -48,7 +52,9 @@ import { SmsControllerProvider } from '../providers/sms-controller/sms-controlle
     PageServiceProvider,
     SmsSenderProvider,
     SMS,
+    HttpClient,
     SmsControllerProvider,
+    BackgroundMode,
   ]
 })
 export class AppModule {}
