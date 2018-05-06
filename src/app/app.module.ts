@@ -16,9 +16,6 @@ import { ResultsModal } from '../pages/results/results';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { PageServiceProvider } from '../providers/pageservice/pageservice';
-import { SmsSenderProvider } from '../providers/sms-sender/sms-sender';
-import { SmsControllerProvider } from '../providers/sms-controller/sms-controller';
 import { SpasmsServiceProvider } from '../providers/spasms-service/spasms-service';
 
 @NgModule({
@@ -50,13 +47,15 @@ import { SpasmsServiceProvider } from '../providers/spasms-service/spasms-servic
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PageServiceProvider,
-    SmsSenderProvider,
     SMS,
     HttpClient,
-    SmsControllerProvider,
     BackgroundMode,
     SpasmsServiceProvider,
   ]
 })
 export class AppModule {}
+
+
+
+
+
