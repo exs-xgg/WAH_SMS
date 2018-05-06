@@ -23,10 +23,8 @@ page = new PageServiceProvider(this.modalCtrl);
 
 getRemoteData(){
   this.http.get('http://api.randomuser.me/?results=1&noinfo').subscribe(data => {
-      this.json=data;
-      alert(JSON.parse(JSON.stringify(data["Results"].gender)));
-      this.checkRemoteData(data);
-  });
+      alert(JSON.stringify(data));
+  },error => this.page.showError());
 }
 
 checkRemoteData(data){

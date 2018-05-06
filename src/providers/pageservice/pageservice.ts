@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ModalController, NavParams } from 'ionic-angular';
 import { CompleteModal } from '../../pages/complete/complete';
-import { HomePage } from '../../pages/home/home';
 /*
   Generated class for the PagecontrolProvider provider.
 
@@ -13,7 +12,6 @@ import { HomePage } from '../../pages/home/home';
 export class PageServiceProvider {
 
   constructor(public modalCtrl: ModalController) {}
-
  
   public showSending(){
     document.getElementById('standby').style.display = "none";
@@ -23,11 +21,6 @@ export class PageServiceProvider {
   public presentCompleteModal() {
     let completeModal = this.modalCtrl.create(CompleteModal);
     completeModal.present();
-  }
-
-  add(num){
-    num=num+1;
-    return num;
   }
 
   showFinished(){
@@ -56,6 +49,8 @@ export class PageServiceProvider {
     document.getElementById('standby').style.display = "none";
     document.getElementById('stopped').style.display = "none";
     document.getElementById('error').style.display = "block";
+    setTimeout(() => { 
+      this.showStandby();}, 5000); 
   }
 
 }

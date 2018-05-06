@@ -16,28 +16,18 @@ export class HomePage{
 
   constructor(public modalCtrl: ModalController,public sms: SMS, public smsController: SmsControllerProvider, public backgroundMode: BackgroundMode) {
   }
-
-  num=0;
+  
   page = new PageServiceProvider(this.modalCtrl);
   sender = new SmsSenderProvider(this.sms);
 
   ngOnInit(){
     this.backgroundMode.enable();
     this.page.showStandby();
-    //this.smsController.getRemoteData();
-    this.count();
+    this.smsController.getRemoteData();
   }
 
   showStandby(){
     this.page.showStandby();
-  }
-
-  count(){
-    while (this.num!=10){
-      setTimeout(() => { 
-        this.num=this.page.add(this.num);}, 4000);
-    }  
-    this.num=15;
   }
 
   showSending(){

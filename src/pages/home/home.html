@@ -25,17 +25,13 @@
   <div id="error" class="hidden">
     <img class="animation" alt="spasms animation" src="assets/imgs/smserror.png">
     <h5>Error! SPASMS cannot connect <br> to the server</h5>
-    <h6>please press the Start button to retry</h6>
+    <h6>Retrying in 5 seconds...</h6>
     <br>
-    <button ion-button icon-left class="start" (click)="showStandby()">
-      <ion-icon name="play"></ion-icon>
-      Start
-      </button>
   </div>
 
   <div id="standby">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsstandby.gif">
-    <h5>{{num}}</h5>
+     <h5>SPASMS is waiting for new <br> messages from server</h5> 
     <br>
     <button ion-button icon-left class="stop" (click)="showStopped()">
       <ion-icon name="square"></ion-icon>
