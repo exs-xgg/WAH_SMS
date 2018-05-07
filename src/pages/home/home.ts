@@ -1,8 +1,9 @@
 import { Component} from '@angular/core';
-import { ModalController } from 'ionic-angular';
-import { PageServiceProvider } from '../../providers/pageservice/pageservice';
-import { SmsSenderProvider } from '../../providers/sms-sender/sms-sender';
+import { ModalController,NavController } from 'ionic-angular';
+import { SpasmsServiceProvider } from '../../providers/spasms-service/spasms-service';
 import { SMS } from '@ionic-native/sms';
+import { HttpClient } from '@angular/common/http';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 @Component({
   selector: 'page-home',
@@ -11,45 +12,18 @@ import { SMS } from '@ionic-native/sms';
 
 export class HomePage{
 
-  constructor(public modalCtrl: ModalController,public sms: SMS) {
+  constructor(public modalCtrl: ModalController,
+              public sms: SMS, 
+              public backgroundMode: BackgroundMode,
+              public http: HttpClient,
+              public navCtrl: NavController,
+            ) {
   }
 
-  page = new PageServiceProvider(this.modalCtrl);
-  sender = new SmsSenderProvider(this.sms);
+  service = new SpasmsServiceProvider(this.modalCtrl,this.http,this.sms,this.navCtrl);
 
   ngOnInit(){
-    this.page.showStandby();
-  }
-
-  showStandby(){
-    this.page.showStandby();
-  }
-
-  Send(){
-    this.sender.Send();
-  }
-
-  showSending(){
-    this.page.showSending();
-  }
-
-  showFinished(){
-    this.page.showFinished();
-  }
-
-  showStopped(){
-    this.page.showStopped();
-  }
-
-  showError(){
-    this.page.showError();
-  }
-
-  onBack(){
-    this.page.showStandby();
-  }
-
-  onViewResults(){
-    this.page.presentCompleteModal();
+    this.backgroundMode.enable();
+    this.service.showStandby();
   }
 }
