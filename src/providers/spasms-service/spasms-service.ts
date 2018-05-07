@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ModalController, NavParams } from 'ionic-angular';
 import { CompleteModal } from '../../pages/complete/complete';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { SMS } from '@ionic-native/sms';
 
 /*
@@ -14,11 +15,16 @@ import { SMS } from '@ionic-native/sms';
 @Injectable()
 export class SpasmsServiceProvider {
 
+  Json;
+  message_quantity=[];
   LGU_name="";
   total_Messages=0;
   failed_Message=0;
   sent_Messages=0;
   finished_Messages=0;
+  id=[];
+  receiver=[];
+  message=[];
 
   constructor(public modalCtrl: ModalController,
               public http: HttpClient,
@@ -72,23 +78,32 @@ export class SpasmsServiceProvider {
       LGU_name=**RECEIVED DATA**
     },error =>  setTimeout(() => { 
       this.showError();},5000))
-    */
+    this.json = JSON.parse(data);*/
   }
 
   getMessages(){
-    /*
-    this.http.get('http://api.randomuser.me/?results=1&noinfo').subscribe(data => {
-      **ADD CONDITION HERE**
-       if no new message
-        setTimeout(() => { 
-          this.getRemoteData();},15000))
-      }else{
-        **PARSE DATA FROM JSON HERE**
-        this.showSending(data);
-      }
-    },error =>  setTimeout(() => { 
-      this.showError();},5000))
-      */
+    var json;
+    this.http.get('http://192.168.1.127/api/spasms/showSms').toPromise()
+    .then((data:any)=> { 
+      var message_quantity=[];
+      console.log(data);
+      message_quantity=data;
+      for (var i of message_quantity) {
+        this.id=i.id;
+        console.log(i.id)
+    };})
+      // var message_quantity=[];
+      // for (var i of json) {
+      //   message_quantity.push(i.quantity_produced);
+      // }
+    //   if (data="[]"){
+    //     setTimeout(() => { 
+    //       },15000)
+    //   }else{
+    //     this.showSending(data);
+    //   }
+    // },error =>  setTimeout(() => { 
+    //   this.showError();},5000))
   }
 
   getLogs(){
