@@ -16,24 +16,23 @@ import { SMS } from '@ionic-native/sms';
 export class SpasmsServiceProvider {
 
   Json;
-  message_quantity=[];
   LGU_name="";
   total_Messages=0;
   failed_Message=0;
   sent_Messages=0;
   finished_Messages=0;
-  id=[];
-  receiver=[];
-  message=[];
+  id: any = [];
+  receiver: any = [];
+  message: any = [];
 
   constructor(public modalCtrl: ModalController,
               public http: HttpClient,
               private sms: SMS) {}
  
-  public showSending(data){
+  public showSending(){
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
-    this.Sender(data);
+    
   }
 
   public presentCompleteModal() {
@@ -82,16 +81,22 @@ export class SpasmsServiceProvider {
   }
 
   getMessages(){
-    var json;
+    
     this.http.get('http://192.168.1.127/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
-      console.log(data);
       message_quantity=data;
+      var k=0;
       for (var i of message_quantity) {
-        this.id=i.id;
-        console.log(i.id)
-    };})
+        this.id[k]=i.id;
+        this.receiver[k]=i.receiver;
+        this.message[k]=i.msg;
+        k++;
+    };   
+    this.Sender();
+    console.log("1");
+    //this.showSending();
+  })
       // var message_quantity=[];
       // for (var i of json) {
       //   message_quantity.push(i.quantity_produced);
@@ -114,10 +119,20 @@ export class SpasmsServiceProvider {
     */
   }
 
-  Sender(data){
-    /*
-    this.sms.send(mobile number, message);
-    */
+  Sender(){
+    var phoneNumber ="";
+    var Message="";
+    console.log("2");
+    for (let i=0; i<=this.id.length; i++) {
+      console.log(i);
+      console.log(this.receiver[i]);
+      phoneNumber=this.receiver[i];
+      Message=this.message[i];
+      this.sms.send(phoneNumber, Message);
+  };   
+
+    
+    
   }
 
 }
