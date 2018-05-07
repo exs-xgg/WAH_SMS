@@ -1,0 +1,22 @@
+[
+	{
+		"id": 1584,
+		"sender": "SERVER",
+		"receiver": "09391626887",
+		"msg": "Test message -Ito ay libreng mensahe mula sa Wireless Access for Health at CALASIAO Rural Health Unit I",
+		"senttime": "2018-05-07",
+		"status": "p",
+		"msgtype": "TXB",
+		"pt_id": "14821"
+	},
+	{
+		"id": 1585,
+		"sender": "SERVER",
+		"receiver": "09391626887",
+		"msg": "Test message -Ito ay libreng mensahe mula sa Wireless Access for Health at CALASIAO Rural Health Unit I",
+		"senttime": "2018-05-07",
+		"status": "p",
+		"msgtype": "TXB",
+		"pt_id": "14821"
+	}
+]
