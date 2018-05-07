@@ -25,26 +25,29 @@
   <div id="error" class="hidden">
     <img class="animation" alt="spasms animation" src="assets/imgs/smserror.png">
     <h5>Error! SPASMS cannot connect <br> to the server</h5>
-    <h6>please press the Start button to retry</h6>
+    <h6>Retrying in 5 seconds...</h6>
     <br>
-    <button ion-button icon-left class="start" (click)="showStandby()">
-      <ion-icon name="play"></ion-icon>
-      Start
-      </button>
   </div>
 
   <div id="standby">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsstandby.gif">
+<<<<<<< HEAD
     <h5>SPASMS is waiting for new <br> messages from server</h5>
+=======
+     <h5>SPASMS is waiting for new <br> messages from server</h5> 
+>>>>>>> Sender
     <br>
     <button ion-button icon-left class="stop" (click)="showStopped()">
       <ion-icon name="square"></ion-icon>
       Stop
     </button>
+<<<<<<< HEAD
     <button ion-button icon-left class="start" (click)="Send(),showSending()">
       <ion-icon name="play"></ion-icon>
       Next
     </button>
+=======
+>>>>>>> Sender
   </div>
 
   <div id="sending" class="hidden">
@@ -52,29 +55,35 @@
     <h5>SPASMS is sending messages</h5>
  
     <img class="progress" alt="spasms animation" src="assets/imgs/progressbar.gif">
+<<<<<<< HEAD
     <h6>8 out of 8 finished</h6>
+=======
+    <h6>{{service.finished_Messages}} out of {{service.total_Messages}} finished</h6>
+>>>>>>> Sender
   
     <br>
-    <button ion-button icon-left class="stop" (click)="showStopped()">
+    <button ion-button icon-left class="stop" (click)="service.showStopped()">
       <ion-icon name="square" ></ion-icon>
       Stop
     </button>
-    <button ion-button icon-left class="start" (click)="showFinished()">
-      <ion-icon name="play"></ion-icon>
-      Next
-      </button>
   </div>
 
   <div id="finished">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsfinished.png">
+<<<<<<< HEAD
     <h4>SPASMS has finished sending<br> messages</h4>
     <br>
     <button ion-button icon-left class="start" (click)="onViewResults()">
       <ion-icon name="done-all" ></ion-icon>
       View Results
     </button>
+=======
+    <h4>SPASMS has finished sending<br> {{service.total_Messages}} messages in this session!</h4>
+    <h6>Sent Messages: {{service.sent_Messages}} messages</h6>
+    <h6>Failed Messages: {{service.failed_Messages}} messages </h6>
+>>>>>>> Sender
 
-    <button ion-button icon-left (click)="onBack()">
+    <button ion-button icon-left (click)="service.showStandby()">
       <ion-icon name="done-all" ></ion-icon>
       Back
     </button>
