@@ -44,10 +44,10 @@
     <h5>SPASMS is sending messages</h5>
  
     <img class="progress" alt="spasms animation" src="assets/imgs/progressbar.gif">
-    <h6>{{service.finished_Messages}} out of {{total_Messages}} finished</h6>
+    <h6>{{service.finished_Messages}} out of {{service.total_Messages}} finished</h6>
   
     <br>
-    <button ion-button icon-left class="stop" (click)="showStopped()">
+    <button ion-button icon-left class="stop" (click)="service.showStopped()">
       <ion-icon name="square" ></ion-icon>
       Stop
     </button>
@@ -55,14 +55,11 @@
 
   <div id="finished">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsfinished.png">
-    <h4>SPASMS has finished sending<br> messages</h4>
-    <br>
-    <button ion-button icon-left class="start" (click)="onViewResults()">
-      <ion-icon name="done-all" ></ion-icon>
-      View Results
-    </button>
+    <h4>SPASMS has finished sending<br> {{service.total_Messages}} messages in this session!</h4>
+    <h6>Sent Messages: {{service.sent_Messages}} messages</h6>
+    <h6>Failed Messages: {{service.failed_Messages}} messages </h6>
 
-    <button ion-button icon-left (click)="onBack()">
+    <button ion-button icon-left (click)="service.showStandby()">
       <ion-icon name="done-all" ></ion-icon>
       Back
     </button>
