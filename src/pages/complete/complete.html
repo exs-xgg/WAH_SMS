@@ -1,0 +1,18 @@
+<ion-content class="main-view">
+    <div class="overlay"></div>
+    <div class="modal_content">
+      <ion-card color="secondary" text-center>
+        <p class="LGU">Results</p>
+     </ion-card>
+      <ion-card class="results" text-center>
+        <h5>Congratulations! You've sent <br>{{service.total_Messages}} messages in this session! </h5>
+        <br>
+        <h5>Sent Messages: {{service.sent_Messages}} messages</h5>
+        <h5>Failed Messages: {{service.failed_Messages}} messages </h5>
+        <button ion-button icon-left (click)="onBack()">
+        <ion-icon name="done-all" ></ion-icon>
+        Back
+        </button>
+      </ion-card>
+    </div>
+</ion-content>
