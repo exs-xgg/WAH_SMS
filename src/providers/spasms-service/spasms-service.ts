@@ -16,7 +16,7 @@ import { SMS } from '@ionic-native/sms';
 export class SpasmsServiceProvider {
 
   Json;
-  LGU_name="";
+  LGU_name="asdasd";
   total_Messages=0;
   total_Daily_Messages=0;
   failed_Messages=0;
@@ -57,7 +57,7 @@ export class SpasmsServiceProvider {
     document.getElementById('finished').style.display ="none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('standby').style.display = "block";
-    this.getMessages();
+    //this.getMessages();
   }
 
   showStopped(){
@@ -77,16 +77,16 @@ export class SpasmsServiceProvider {
   }
 
   getLGU(){
-    /* 
-      this.http.get('LGU from server').subscribe(data => {
-      LGU_name=**RECEIVED DATA**
-    },error =>  setTimeout(() => { 
-      this.showError();},5000))
-    this.json = JSON.parse(data);*/
-  }
+    this.http.get('http://192.168.1.129/api/spasms/getRHU').toPromise()
+    .then((data:any)=> { 
+      var i;
+      this.LGU_name=i.data;
+     
+  })}
 
   getMessages(){
-    this.http.get('../../assets/sample.json').toPromise()
+    //this.http.get('../../assets/sample.json').toPromise()
+    this.http.get('http://192.168.1.129/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
       message_quantity=data;
@@ -113,17 +113,23 @@ export class SpasmsServiceProvider {
   Sender(){
     var phoneNumber ="";
     var Message="";
+    var status = "s";
     this.total_Messages=this.id.length;
     for (let i=0; i<this.total_Messages; i++) {
       phoneNumber=this.receiver[i];
       Message=this.message[i];
       this.sms.send(phoneNumber,Message).then((result) => {
         this.sent_Messages++;
+        status = "s";
         }, (error) => {
         this.failed_Messages++;
-        console.log("error",this.failed_Messages);
+        status = "x";
         })
         this.finished_Messages++;
+        console.log('http://192.168.1.129/api/spasms/updateStats/'+this.id[i]+'/'+status);
+        this.http.get('http://192.168.1.129/api/spasms/updateStats/'+this.id[i]+'/'+status).toPromise()
+        .then((data:any)=> { 
+      })
       }
     this.showFinished();   
   }

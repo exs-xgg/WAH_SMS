@@ -11,7 +11,6 @@ import { HelpPage } from '../pages/help/help';
 import { LogsPage } from '../pages/logs/logs';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { CompleteModal } from '../pages/complete/complete';
 import { ResultsModal } from '../pages/results/results';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -25,7 +24,6 @@ import { SpasmsServiceProvider } from '../providers/spasms-service/spasms-servic
     LogsPage,
     HomePage,
     TabsPage,
-    CompleteModal,
     ResultsModal,
   ],
   imports: [
@@ -40,7 +38,6 @@ import { SpasmsServiceProvider } from '../providers/spasms-service/spasms-servic
     LogsPage,
     HomePage,
     TabsPage,
-    CompleteModal,
     ResultsModal,
   ],
   providers: [
