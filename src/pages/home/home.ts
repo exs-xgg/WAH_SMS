@@ -25,6 +25,6 @@ export class HomePage{
   ngOnInit(){
     this.backgroundMode.enable();
     this.service.showStandby();
-    //this.service.getLGU();
+    this.service.getLGU();
   }
 }
