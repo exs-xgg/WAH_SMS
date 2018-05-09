@@ -16,7 +16,7 @@ import { SMS } from '@ionic-native/sms';
 export class SpasmsServiceProvider {
 
   Json;
-  LGU_name="asdasd";
+  LGU_name="";
   total_Messages=0;
   total_Daily_Messages=0;
   failed_Messages=0;
@@ -124,7 +124,7 @@ startInterval(){
   },error=>alert("Cannot retrieve RHU name"))}
 
   getMessages(){
-    this.http.get('../../assets/sample.json').toPromise()
+    this.http.get('../../ssets/sample.json').toPromise()
     //this.http.get('http://192.168.1.129/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
@@ -137,7 +137,7 @@ startInterval(){
         k++;
     };   
     this.Sender();
-  })
+  },error=>this.showError())
   }
 
   getLogs(){
