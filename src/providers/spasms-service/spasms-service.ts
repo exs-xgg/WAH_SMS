@@ -26,6 +26,8 @@ export class SpasmsServiceProvider {
   receiver: any = [];
   message: any = [];
   interval:any;
+  interval2:any;
+  interval3:any;
   timer;
   timer2;
 
@@ -39,6 +41,13 @@ export class SpasmsServiceProvider {
 
 clearInterval(){
       clearInterval(this.interval);
+}
+
+clearInterval2(){
+  clearInterval(this.interval2);
+}
+clearInterval3(){
+  clearInterval(this.interval3);
 }
 
 startInterval(){
@@ -68,17 +77,17 @@ startInterval(){
   }
 
   showFinished(){
-    this.timer2=15;
+    this.timer2=3;
     document.getElementById('error').style.display = "none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display ="block";
-    this.interval = setInterval(() => {
+    this.interval2 = setInterval(() => {
       this.timer2--;
     }, 1000);
      setTimeout(() => { 
-       this.clearInterval();
-       this.showStandby();}, 15000);     
+       this.clearInterval2();
+       this.showStandby();}, 3000);     
   }
 
   showStandby(){
@@ -107,11 +116,11 @@ startInterval(){
     document.getElementById('standby').style.display = "none";
     document.getElementById('stopped').style.display = "none";
     document.getElementById('error').style.display = "block";
-    this.interval = setInterval(() => {
+    this.interval3 = setInterval(() => {
      this.timer--;
    }, 1000);
     setTimeout(() => { 
-      this.clearInterval();
+      this.clearInterval3();
       this.showStandby();}, 5000); 
   }
 
