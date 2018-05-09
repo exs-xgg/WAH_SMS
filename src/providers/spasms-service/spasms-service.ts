@@ -25,7 +25,9 @@ export class SpasmsServiceProvider {
   id: any = [];
   receiver: any = [];
   message: any = [];
-
+  interval:any;
+  timer;
+  timer2;
 
   constructor(public modalCtrl: ModalController,
               public http: HttpClient,
@@ -33,8 +35,7 @@ export class SpasmsServiceProvider {
               private navCtrl:NavController
             ) {}
  
-interval:any;
-zone:any;
+
 
 clearInterval(){
       clearInterval(this.interval);
@@ -67,10 +68,17 @@ startInterval(){
   }
 
   showFinished(){
+    this.timer2=15;
     document.getElementById('error').style.display = "none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('sending').style.display = "none";
-    document.getElementById('finished').style.display ="block";    
+    document.getElementById('finished').style.display ="block";
+    this.interval = setInterval(() => {
+      this.timer2--;
+    }, 1000);
+     setTimeout(() => { 
+       this.clearInterval();
+       this.showStandby();}, 15000);     
   }
 
   showStandby(){
@@ -93,12 +101,17 @@ startInterval(){
   }
 
   showError(){
+    this.timer=5;
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display = "none";
     document.getElementById('standby').style.display = "none";
     document.getElementById('stopped').style.display = "none";
     document.getElementById('error').style.display = "block";
+    this.interval = setInterval(() => {
+     this.timer--;
+   }, 1000);
     setTimeout(() => { 
+      this.clearInterval();
       this.showStandby();}, 5000); 
   }
 
@@ -124,7 +137,7 @@ startInterval(){
   },error=>alert("Cannot retrieve RHU name"))}
 
   getMessages(){
-    this.http.get('../../ssets/sample.json').toPromise()
+    this.http.get('../../assets/sample.json').toPromise()
     //this.http.get('http://192.168.1.129/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
