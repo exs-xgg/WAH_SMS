@@ -26,15 +26,32 @@ export class SpasmsServiceProvider {
   receiver: any = [];
   message: any = [];
 
+
   constructor(public modalCtrl: ModalController,
               public http: HttpClient,
               private sms: SMS,
               private navCtrl:NavController
             ) {}
  
+interval:any;
+zone:any;
+
+clearInterval(){
+      clearInterval(this.interval);
+}
+
+startInterval(){
+      this.interval = setInterval(() => {
+          if (this.finished_Messages==this.total_Messages){
+              this.showFinished();
+              this.clearInterval();
+          }
+       }, 5000);
+}          
   showSending(){
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
+    this.startInterval();
     // setTimeout(() => { 
     //   for (; this.finished_Messages<=this.total_Messages;) {
     //     if (this.finished_Messages==this.total_Messages){
@@ -42,7 +59,7 @@ export class SpasmsServiceProvider {
     //   }else{}
     // };}, 2000); 
   }
-    
+  
 
   presentCompleteModal() {
     let completeModal = this.modalCtrl.create(CompleteModal);
@@ -58,9 +75,9 @@ export class SpasmsServiceProvider {
 
   showStandby(){
     this.total_Daily_Messages=0;
-    // this.failed_Messages=0;
-    // this.sent_Messages=0;
-    // this.finished_Messages=0;
+    this.failed_Messages=0;
+    this.sent_Messages=0;
+    this.finished_Messages=0;
     this.total_Messages=0;
     document.getElementById('error').style.display = "none";
     document.getElementById('finished').style.display ="none";
@@ -134,7 +151,7 @@ export class SpasmsServiceProvider {
   Sender(){
     var phoneNumber ="";
     var Message="";
-    var status = "s";
+    var status = "";
     this.total_Messages=this.id.length;
     for (let i=0; i<this.total_Messages; i++) {
       phoneNumber=this.receiver[i];
@@ -158,7 +175,9 @@ export class SpasmsServiceProvider {
       //   .then((data:any)=> { 
       // })
       }
-      this.showSending();
+      if (this.total_Messages>0){
+        this.showSending();
+      }
   }
 
 }
