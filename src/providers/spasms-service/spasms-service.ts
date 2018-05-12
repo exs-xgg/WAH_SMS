@@ -28,8 +28,10 @@ export class SpasmsServiceProvider {
   interval:any;
   interval2:any;
   interval3:any;
+  interval4:any;
   timer;
   timer2;
+  status = "";
 
   constructor(public modalCtrl: ModalController,
               public http: HttpClient,
@@ -40,14 +42,19 @@ export class SpasmsServiceProvider {
 
 
 clearInterval(){
-      clearInterval(this.interval);
+  clearInterval(this.interval);
 }
 
 clearInterval2(){
   clearInterval(this.interval2);
 }
+
 clearInterval3(){
   clearInterval(this.interval3);
+}
+
+clearInterval4(){
+  clearInterval(this.interval4);
 }
 
 startInterval(){
@@ -58,6 +65,16 @@ startInterval(){
           }
        }, 5000);
 }          
+
+// startInterval2(){
+//   this.interval4 = setInterval(() => {
+//       if (this.finished_Messages==this.total_Messages){
+//           this.showFinished();
+//           this.clearInterval();
+//       }
+//    }, 5000);
+// }          
+
   showSending(){
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
@@ -100,7 +117,10 @@ startInterval(){
     document.getElementById('finished').style.display ="none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('standby').style.display = "block";
-    this.getMessages();
+    this.interval4 = setInterval(() => {
+      this.getMessages();
+    }, 5000);
+    this.getLGU();
   }
 
   showStopped(){
@@ -120,13 +140,19 @@ startInterval(){
      this.timer--;
    }, 1000);
     setTimeout(() => { 
+      console.log(this.timer);
       this.clearInterval3();
-      this.showStandby();}, 5000); 
+      this.showStandby();}, 5000);   
+  }
+
+  onBack(){
+    this.clearInterval2();
+    this.showStandby();
   }
 
   getLGU(){
-    this.http.get('../../assets/RHU.json').toPromise()
-    //this.http.get('http://192.168.1.129/api/spasms/getRHU').toPromise()
+    //this.http.get('../../assets/RHU.json').toPromise()
+    this.http.get('http://192.168.0.119/api/spasms/getRHU').toPromise()
     .then((data:any)=> { 
       var LGU=[];
       LGU=data;
@@ -143,11 +169,12 @@ startInterval(){
                         document.getElementById('LGU').style.fontSize = "3.8vw";
                       }else{
                         document.getElementById('LGU').style.fontSize = "3.2vw";}
-  },error=>alert("Cannot retrieve RHU name"))}
+  },error=>console.log("Cannot retrieve RHU name")
+  )}
 
   getMessages(){
-    this.http.get('../../assets/sample.json').toPromise()
-    //this.http.get('http://192.168.1.129/api/spasms/showSms').toPromise()
+   //this.http.get('../../assets/sample.json').toPromise()
+    this.http.get('http://192.168.0.119/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
       message_quantity=data;
@@ -159,7 +186,9 @@ startInterval(){
         k++;
     };   
     this.Sender();
+    //
   },error=>this.showError())
+  //
   }
 
   getLogs(){
@@ -173,7 +202,7 @@ startInterval(){
   Sender(){
     var phoneNumber ="";
     var Message="";
-    var status = "";
+    this.status="s";
     this.total_Messages=this.id.length;
     for (let i=0; i<this.total_Messages; i++) {
       phoneNumber=this.receiver[i];
@@ -181,23 +210,25 @@ startInterval(){
       this.sms.send(phoneNumber,Message).then((result) => {
         this.sent_Messages++;
         this.finished_Messages++;
-        status = "s";
+        this.status = "s";
         }, (error) => {
         this.failed_Messages++;
         this.finished_Messages++;
-        status = "x";
-        })
+        this.status = "x";
+        });
         console.log(this.sent_Messages);
         console.log(this.failed_Messages);
         console.log(this.total_Messages);
         console.log(this.finished_Messages);     
         console.log(this.failed_Messages);  
-      //  console.log('http://192.168.1.129/api/spasms/updateStats/'+this.id[i]+'/'+status);
-      //   this.http.get('http://192.168.1.129/api/spasms/updateStats/'+this.id[i]+'/'+status).toPromise()
-      //   .then((data:any)=> { 
-      // })
+        console.log("status" + this.status + "hello");
+         console.log('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status);
+        this.http.get('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status).toPromise()
+        .then((data:any)=> { 
+      });
       }
       if (this.total_Messages>0){
+        this.clearInterval4();
         this.showSending();
       }
   }
