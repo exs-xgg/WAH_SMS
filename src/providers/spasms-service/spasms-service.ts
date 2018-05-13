@@ -25,8 +25,12 @@ export class SpasmsServiceProvider {
   id: any = [];
   receiver: any = [];
   message: any = [];
-  interval:any;
-  interval2:any;
+
+  refresh_interval:any;
+  error_interval:any;
+  checker_interval:any;
+  finish_interval:any;
+  
   interval3:any;
   interval4:any;
   timer;
@@ -40,30 +44,48 @@ export class SpasmsServiceProvider {
             ) {}
  
 
-
-clearInterval(){
-  clearInterval(this.interval);
+clearRefreshInterval(){
+  clearInterval(this.refresh_interval);
 }
 
-clearInterval2(){
-  clearInterval(this.interval2);
+clearErrorInterval(){
+  clearInterval(this.error_interval);
 }
 
-clearInterval3(){
-  clearInterval(this.interval3);
+clearCheckerInterval(){
+  clearInterval(this.checker_interval);
 }
 
-clearInterval4(){
-  clearInterval(this.interval4);
+clearFinishInterval(){
+  clearInterval(this.finish_interval);
 }
 
-startInterval(){
-      this.interval = setInterval(() => {
+startRefreshInterval(){
+  this.refresh_interval = setInterval(() => {
+    this.getMessages();
+    this.getLGU();
+  }, 5000);
+}          
+
+startErrorInterval(){
+  this.error_interval = setInterval(() => {
+    this.timer--;
+  }, 1000);
+}          
+
+startCheckerInterval(){
+      this.finish_interval = setInterval(() => {
           if (this.finished_Messages==this.total_Messages){
               this.showFinished();
-              this.clearInterval();
+              this.clearCheckerInterval();
           }
        }, 5000);
+}          
+
+startFinishInterval(){
+  this.finish_interval = setInterval(() => {
+    this.timer2--;
+  }, 1000);
 }          
 
 // startInterval2(){
@@ -78,7 +100,8 @@ startInterval(){
   showSending(){
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
-    this.startInterval();
+    this.startCheckerInterval();
+    this.startCheckerInterval();
     // setTimeout(() => { 
     //   for (; this.finished_Messages<=this.total_Messages;) {
     //     if (this.finished_Messages==this.total_Messages){
@@ -99,12 +122,9 @@ startInterval(){
     document.getElementById('stopped').style.display ="none";
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display ="block";
-    this.interval2 = setInterval(() => {
-      this.timer2--;
-    }, 1000);
-     setTimeout(() => { 
-       this.clearInterval2();
-       this.showStandby();}, 3000);     
+    setTimeout(() => { 
+      this.clearFinishInterval();
+      this.showStandby();}, 3000);     
   }
 
   showStandby(){
@@ -117,10 +137,7 @@ startInterval(){
     document.getElementById('finished').style.display ="none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('standby').style.display = "block";
-    this.interval4 = setInterval(() => {
-      this.getMessages();
-    }, 5000);
-    this.getLGU();
+    this.startRefreshInterval();
   }
 
   showStopped(){
@@ -136,17 +153,15 @@ startInterval(){
     document.getElementById('standby').style.display = "none";
     document.getElementById('stopped').style.display = "none";
     document.getElementById('error').style.display = "block";
-    this.interval3 = setInterval(() => {
-     this.timer--;
-   }, 1000);
+    this.startErrorInterval();
     setTimeout(() => { 
       console.log(this.timer);
-      this.clearInterval3();
+      this.clearErrorInterval();
       this.showStandby();}, 5000);   
   }
 
   onBack(){
-    this.clearInterval2();
+    this.clearFinishInterval();
     this.showStandby();
   }
 
@@ -186,7 +201,9 @@ startInterval(){
     };   
     this.Sender();
     //
-  },error=>this.showError())
+  },error=>{
+  this.clearRefreshInterval();
+  this.showError();})
   //
   }
 
@@ -199,6 +216,8 @@ startInterval(){
   }
 
   Sender(){
+    this.clearRefreshInterval();
+    this.startCheckerInterval();
     var phoneNumber ="";
     var Message="";
     this.status="";
@@ -227,7 +246,7 @@ startInterval(){
       });
       }
       if (this.total_Messages>0){
-        this.clearInterval4();
+        this.clearRefreshInterval();
         this.showSending();
       }
   }
