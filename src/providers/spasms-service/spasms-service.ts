@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ModalController, NavParams,NavController } from 'ionic-angular';
-import { CompleteModal } from '../../pages/complete/complete';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { SMS } from '@ionic-native/sms';
@@ -111,10 +110,10 @@ startFinishInterval(){
   }
   
 
-  presentCompleteModal() {
-    let completeModal = this.modalCtrl.create(CompleteModal);
-    completeModal.present();
-  }
+  // presentCompleteModal() {
+  //   let completeModal = this.modalCtrl.create(CompleteModal);
+  //   completeModal.present();
+  // }
 
   showFinished(){
     this.timer2=3;
@@ -138,6 +137,7 @@ startFinishInterval(){
     document.getElementById('stopped').style.display ="none";
     document.getElementById('standby').style.display = "block";
     this.startRefreshInterval();
+    console.log("standby called")
   }
 
   showStopped(){
@@ -147,6 +147,7 @@ startFinishInterval(){
   }
 
   showError(){
+    this.clearRefreshInterval();
     this.timer=5;
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display = "none";
@@ -202,7 +203,8 @@ startFinishInterval(){
     this.Sender();
     //
   },error=>{
-  this.clearRefreshInterval();
+ 
+  console.log("error called")
   this.showError();})
   //
   }
@@ -234,13 +236,13 @@ startFinishInterval(){
         this.finished_Messages++;
         this.status = "x";
         });
-        console.log(this.sent_Messages);
-        console.log(this.failed_Messages);
-        console.log(this.total_Messages);
-        console.log(this.finished_Messages);     
-        console.log(this.failed_Messages);  
-        console.log("status" + this.status + "hello");
-         console.log('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status);
+        // console.log(this.sent_Messages);
+        // console.log(this.failed_Messages);
+        // console.log(this.total_Messages);
+        // console.log(this.finished_Messages);     
+        // console.log(this.failed_Messages);  
+        // console.log("status" + this.status + "hello");
+        //  console.log('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status);
         this.http.get('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status).toPromise()
         .then((data:any)=> { 
       });
