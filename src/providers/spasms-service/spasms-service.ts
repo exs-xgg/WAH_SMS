@@ -73,12 +73,12 @@ startErrorInterval(){
 }          
 
 startCheckerInterval(){
-      this.finish_interval = setInterval(() => {
+      this.checker_interval = setInterval(() => {
           if (this.finished_Messages==this.total_Messages){
-              this.showFinished();
-              this.clearCheckerInterval();
+            this.clearCheckerInterval();
+            this.showFinished();
           }
-       }, 5000);
+       }, 3000);
 }          
 
 startFinishInterval(){
@@ -97,10 +97,11 @@ startFinishInterval(){
 // }          
 
   showSending(){
+    console.log("sending called");
+    this.startCheckerInterval();
+    this.clearRefreshInterval();
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
-    this.startCheckerInterval();
-    this.startCheckerInterval();
     // setTimeout(() => { 
     //   for (; this.finished_Messages<=this.total_Messages;) {
     //     if (this.finished_Messages==this.total_Messages){
@@ -116,17 +117,20 @@ startFinishInterval(){
   // }
 
   showFinished(){
+    this.clearCheckerInterval();
+    console.log("finish called")
+    this.startFinishInterval();
     this.timer2=3;
     document.getElementById('error').style.display = "none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display ="block";
     setTimeout(() => { 
-      this.clearFinishInterval();
-      this.showStandby();}, 3000);     
+      this.showStandby();}, 3000);   
   }
 
   showStandby(){
+    this.clearFinishInterval();
     this.total_Daily_Messages=0;
     this.failed_Messages=0;
     this.sent_Messages=0;
@@ -144,6 +148,7 @@ startFinishInterval(){
     document.getElementById('sending').style.display = "none";
     document.getElementById('standby').style.display = "none";
     document.getElementById('stopped').style.display = "block";
+    this.clearCheckerInterval();
   }
 
   showError(){
@@ -156,7 +161,6 @@ startFinishInterval(){
     document.getElementById('error').style.display = "block";
     this.startErrorInterval();
     setTimeout(() => { 
-      console.log(this.timer);
       this.clearErrorInterval();
       this.showStandby();}, 5000);   
   }
@@ -167,8 +171,8 @@ startFinishInterval(){
   }
 
   getLGU(){
-    //this.http.get('../../assets/RHU.json').toPromise()
-    this.http.get('http://192.168.0.119/api/spasms/getRHU').toPromise()
+    this.http.get('../../assets/RHU.json').toPromise()
+    //this.http.get('http://192.168.0.119/api/spasms/getRHU').toPromise()
     .then((data:any)=> { 
       var LGU=[];
       LGU=data;
@@ -189,7 +193,8 @@ startFinishInterval(){
   )}
 
   getMessages(){
-    this.http.get('http://192.168.0.119/api/spasms/showSms').toPromise()
+    this.http.get('../../assets/sample.json').toPromise()
+    //this.http.get('http://192.168.0.119/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
       message_quantity=data;
@@ -209,20 +214,13 @@ startFinishInterval(){
   //
   }
 
-  getLogs(){
-    /* this.http.get('logs from server').subscribe(data => {
-      **STORE LOGS**
-    },error =>  setTimeout(() => { 
-      this.showError();},5000))
-    */
-  }
-
   Sender(){
     this.clearRefreshInterval();
-    this.startCheckerInterval();
+ 
     var phoneNumber ="";
     var Message="";
     this.status="";
+  
     this.total_Messages=this.id.length;
     for (let i=0; i<this.total_Messages; i++) {
       phoneNumber=this.receiver[i];
@@ -243,12 +241,11 @@ startFinishInterval(){
         // console.log(this.failed_Messages);  
         // console.log("status" + this.status + "hello");
         //  console.log('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status);
-        this.http.get('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status).toPromise()
-        .then((data:any)=> { 
-      });
+      //   this.http.get('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status).toPromise()
+      //   .then((data:any)=> { 
+      // });
       }
       if (this.total_Messages>0){
-        this.clearRefreshInterval();
         this.showSending();
       }
   }
