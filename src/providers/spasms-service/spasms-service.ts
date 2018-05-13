@@ -173,7 +173,6 @@ startInterval(){
   )}
 
   getMessages(){
-   //this.http.get('../../assets/sample.json').toPromise()
     this.http.get('http://192.168.0.119/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
@@ -202,7 +201,7 @@ startInterval(){
   Sender(){
     var phoneNumber ="";
     var Message="";
-    this.status="s";
+    this.status="";
     this.total_Messages=this.id.length;
     for (let i=0; i<this.total_Messages; i++) {
       phoneNumber=this.receiver[i];
