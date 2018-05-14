@@ -24,6 +24,9 @@ export class SpasmsServiceProvider {
   id: any = [];
   receiver: any = [];
   message: any = [];
+  ip_Address="192.168.1.100";
+  temp_Address="";
+  p;
 
   refresh_interval:any;
   error_interval:any;
@@ -63,8 +66,10 @@ clearFinishInterval(){
 
 startRefreshInterval(){
   this.refresh_interval = setInterval(() => {
-    this.getMessages();
-    this.getLGU();
+    if (this.p==0){
+      this.getMessages();
+      this.getLGU();
+    }
   }, 5000);
 }          
 
@@ -133,11 +138,14 @@ startFinishInterval(){
   }
 
   showStandby(){
+    this.p=0;
+    this.temp_Address="";
     this.total_Daily_Messages=0;
     this.failed_Messages=0;
     this.sent_Messages=0;
     this.finished_Messages=0;
     this.total_Messages=0;
+    document.getElementById('ipChange').style.display = "none";
     document.getElementById('error').style.display = "none";
     document.getElementById('finished').style.display ="none";
     document.getElementById('stopped').style.display ="none";
@@ -173,9 +181,32 @@ startFinishInterval(){
     this.showStandby();
   }
 
+  onIpSave(){
+    this.clearRefreshInterval();
+    this.ip_Address=this.temp_Address;
+    this.showStandby();
+    this.p=0;
+  }
+
+  onIpCancel(){
+    this.clearRefreshInterval();
+    this.showStandby();
+    this.p=0;
+  }
+
+  onIpChange(){
+    this.p=1;
+    document.getElementById('sending').style.display = "none";
+    document.getElementById('finished').style.display = "none";
+    document.getElementById('standby').style.display = "none";
+    document.getElementById('stopped').style.display = "none";
+    document.getElementById('error').style.display = "none";
+    document.getElementById('ipChange').style.display = "block";
+  }
+
   getLGU(){
     this.http.get('../../assets/RHU.json').toPromise()
-    //this.http.get('http://192.168.0.119/api/spasms/getRHU').toPromise()
+    //this.http.get('http://'+ this.ip_Address'+'/api/spasms/getRHU').toPromise()
     .then((data:any)=> { 
       var LGU=[];
       LGU=data;
@@ -197,7 +228,7 @@ startFinishInterval(){
 
   getMessages(){
     this.http.get('../../assets/sample.json').toPromise()
-    //this.http.get('http://192.168.0.119/api/spasms/showSms').toPromise()
+    //this.http.get('http://'+ this.ip_Address'+'/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       var message_quantity=[];
       message_quantity=data;
@@ -211,7 +242,6 @@ startFinishInterval(){
     this.Sender();
     //
   },error=>{
- 
   console.log("error called")
   this.showError();})
   //
@@ -244,7 +274,7 @@ startFinishInterval(){
         // console.log(this.failed_Messages);  
         // console.log("status" + this.status + "hello");
         //  console.log('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status);
-      //   this.http.get('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status).toPromise()
+      //   this.http.get('http://'+ this.ip_Address'+'/api/spasms/updateStats/'+this.id[i]+'/'+this.status).toPromise()
       //   .then((data:any)=> { 
       // });
       }
