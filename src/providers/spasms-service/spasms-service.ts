@@ -29,6 +29,8 @@ export class SpasmsServiceProvider {
   error_interval:any;
   checker_interval:any;
   finish_interval:any;
+
+  finish;
   
   interval3:any;
   interval4:any;
@@ -74,6 +76,7 @@ startErrorInterval(){
 
 startCheckerInterval(){
       this.checker_interval = setInterval(() => {
+        console.log("check")
           if (this.finished_Messages==this.total_Messages){
             this.clearCheckerInterval();
             this.showFinished();
@@ -86,15 +89,6 @@ startFinishInterval(){
     this.timer2--;
   }, 1000);
 }          
-
-// startInterval2(){
-//   this.interval4 = setInterval(() => {
-//       if (this.finished_Messages==this.total_Messages){
-//           this.showFinished();
-//           this.clearInterval();
-//       }
-//    }, 5000);
-// }          
 
   showSending(){
     console.log("sending called");
@@ -116,21 +110,29 @@ startFinishInterval(){
   //   completeModal.present();
   // }
 
+  finishTimeout(){
+    this.finish=setTimeout(() => { 
+      this.clearFinishInterval();
+      this.showStandby();}, 10000);   
+  }
+
+  clearFinishTimeout(){
+    clearTimeout(this.finish);   
+  }
+
   showFinished(){
     this.clearCheckerInterval();
     console.log("finish called")
     this.startFinishInterval();
-    this.timer2=3;
+    this.timer2=10;
     document.getElementById('error').style.display = "none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display ="block";
-    setTimeout(() => { 
-      this.showStandby();}, 3000);   
+    this.finishTimeout();
   }
 
   showStandby(){
-    this.clearFinishInterval();
     this.total_Daily_Messages=0;
     this.failed_Messages=0;
     this.sent_Messages=0;
@@ -160,13 +162,14 @@ startFinishInterval(){
     document.getElementById('stopped').style.display = "none";
     document.getElementById('error').style.display = "block";
     this.startErrorInterval();
-    setTimeout(() => { 
+      setTimeout(() => { 
       this.clearErrorInterval();
       this.showStandby();}, 5000);   
   }
 
   onBack(){
     this.clearFinishInterval();
+    this.clearFinishTimeout();
     this.showStandby();
   }
 
