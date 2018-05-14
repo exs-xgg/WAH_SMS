@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content text-center padding has-tabs="true">
+<ion-content text-center padding>
   <ion-card class="card">
     <p id="LGU" class="LGU">{{service.LGU_name}}</p>
   </ion-card>
@@ -31,12 +31,26 @@
 
   <div id="standby">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsstandby.gif">
-     <h5>SPASMS is waiting for new <br> messages from server</h5> 
+    <h6 text-left>Server IP Address:</h6> 
+    <div>
+    <ion-card class="card2">
+      <p class="ip" text-left>{{service.ip_Address}}</p>
+       
+       </ion-card>
+       <button class="change" ion-button icon-left>
+        <ion-icon name="settings"></ion-icon>
+        Change
+       </button>
+     </div>
+    
+    
     <br>
-    <button ion-button icon-left class="stop" (click)="showStopped()">
+    <h5>SPASMS is waiting for new messages <br>from server {{service.ip_Address}}</h5> 
+    
+   <!--  <button ion-button icon-left class="stop" (click)="service.showStopped()">
       <ion-icon name="square"></ion-icon>
       Stop
-    </button>
+    </button> -->
   </div>
 
   <div id="sending" class="hidden">
@@ -47,18 +61,17 @@
     <h6>{{service.finished_Messages}} out of {{service.total_Messages}} finished</h6>
   
     <br>
-    <button ion-button icon-left class="stop" (click)="service.showStopped()">
+    <!-- <button ion-button icon-left class="stop" (click)="service.showStopped()">
       <ion-icon name="square" ></ion-icon>
       Stop
-    </button>
+    </button> -->
   </div>
 
   <div id="finished">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsfinished.png">
-    <h4>SPASMS has finished sending<br> {{service.total_Messages}} messages in this session!</h4>
+    <h4>SPASMS has set {{service.total_Messages}} messages<br> in this session!</h4>
     <h6>Sent Messages: {{service.sent_Messages}} messages</h6>
     <h6>Failed Messages: {{service.failed_Messages}} messages </h6>
-
     <h6>Waiting for new messages in {{service.timer2}} second/s...</h6>
     <button ion-button icon-left (click)="service.onBack()">
       <ion-icon name="done-all" ></ion-icon>
