@@ -24,7 +24,7 @@
 
   <div id="error" class="hidden">
     <img class="animation" alt="spasms animation" src="assets/imgs/smserror.png">
-    <h5>Error! SPASMS cannot connect <br> to the server</h5>
+    <h5>Error! SPASMS cannot connect to the<br> server at {{service.ip_Address}}</h5>
     <h6>Retrying in {{service.timer}} seconds...</h6>
     <br>
   </div>
@@ -33,24 +33,44 @@
     <img class="animation" alt="spasms animation" src="assets/imgs/smsstandby.gif">
     <h6 text-left>Server IP Address:</h6> 
     <div>
-    <ion-card class="card2">
-      <p class="ip" text-left>{{service.ip_Address}}</p>
-       
-       </ion-card>
-       <button class="change" ion-button icon-left>
-        <ion-icon name="settings"></ion-icon>
-        Change
-       </button>
-     </div>
-    
-    
+    <ion-card class="card2" float-left>
+      <p class="ip" text-center>{{service.ip_Address}}</p>
+    </ion-card>
+    <button float-left class="change" ion-button icon-left (click)="service.onIpChange()">
+      <ion-icon name="settings"></ion-icon>
+      Change
+    </button>
+    </div>
     <br>
-    <h5>SPASMS is waiting for new messages <br>from server {{service.ip_Address}}</h5> 
+    <br>
+    <br>
+    <h5>SPASMS is waiting for new messages <br>from server at {{service.ip_Address}}</h5> 
     
    <!--  <button ion-button icon-left class="stop" (click)="service.showStopped()">
       <ion-icon name="square"></ion-icon>
       Stop
     </button> -->
+  </div>
+
+  <div id="ipChange" class="hidden">
+    <br>
+    <h6 text-left>Server IP Address:</h6> 
+    <div>
+
+    <ion-card float-left>
+       <ion-input text-center  [(ngModel)]="service.temp_Address" placeholder="{{service.ip_Address}}"></ion-input>
+    </ion-card>
+    </div>
+    <br>
+    <br>
+    <button ion-button icon-left class="change" (click)="service.onIpCancel()"> 
+      <ion-icon name="done-all"></ion-icon>
+      Cancel
+    </button>
+    <button ion-button icon-left class="change" (click)="service.onIpSave()"> 
+      <ion-icon name="done-all"></ion-icon>
+      Save
+    </button>
   </div>
 
   <div id="sending" class="hidden">
@@ -61,7 +81,7 @@
     <h6>{{service.finished_Messages}} out of {{service.total_Messages}} finished</h6>
   
     <br>
-    <!-- <button ion-button icon-left class="stop" (click)="service.showStopped()">
+   <!--  <button ion-button icon-left class="stop" (click)="service.showStopped()">
       <ion-icon name="square" ></ion-icon>
       Stop
     </button> -->
