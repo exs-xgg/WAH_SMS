@@ -27,12 +27,14 @@ export class SpasmsServiceProvider {
   ip_Address="192.168.1.100";
   temp_Address="";
   p;
+  i=0;
+  result=0;
 
   refresh_interval:any;
   error_interval:any;
   checker_interval:any;
   finish_interval:any;
-
+  send_interval:any;
   finish;
   
   interval3:any;
@@ -82,7 +84,7 @@ startErrorInterval(){
 startCheckerInterval(){
       this.checker_interval = setInterval(() => {
         console.log("check")
-          if (this.finished_Messages==20){
+          if (this.finished_Messages==this.total_Messages){
             this.clearCheckerInterval();
             this.showFinished();
             this.p=0;
@@ -100,8 +102,22 @@ startFinishInterval(){
   this.finish_interval = setInterval(() => {
     this.timer2--;
   }, 1000);
-}          
+}     
 
+startSendInterval(){
+  this.send_interval = setInterval(() => {
+    if (this.result==1){
+      this.result=0;
+      this.i++;
+      this.Sender();
+      this.clearSendInterval();
+    }
+  }, 1000);
+}   
+
+clearSendInterval(){
+  clearTimeout(this.send_interval);
+}
   showSending(){
     console.log("sending called");
     this.startCheckerInterval();
@@ -234,6 +250,7 @@ startFinishInterval(){
       message_quantity=data;
       console.log(message_quantity);
       if (message_quantity.length!=0){
+        this.showSending();
         var k=0;
         for (var i of message_quantity) {
           this.id[k]=i.id;
@@ -261,28 +278,48 @@ startFinishInterval(){
     this.status="";
   
     this.total_Messages=this.id.length;
-    for (let i=0; i<20; i++) {
-      phoneNumber=this.receiver[i];
-      Message=this.message[i];
-      this.sms.send(phoneNumber,Message).then(() => {
+    if (this.i<this.total_Messages){
+      phoneNumber=this.receiver[this.i];
+      Message=this.message[this.i];
+      this.Send(phoneNumber,Message);
+      // this.sms.send(phoneNumber,Message).then(() => {
+      //   this.sent_Messages++;
+      //   this.finished_Messages++;
+      //   console.log('http:///s');
+      //   this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/s').toPromise()
+      //   .then((data:any)=> { 
+      //    });
+      //   }, () => {
+      //   this.failed_Messages++;
+      //   this.finished_Messages++;
+      //   console.log('http:///x');
+      //   this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/x').toPromise()
+      //   .then((data:any)=> { 
+      //     });
+      //   });
+      }
+     
+  }
+
+  Send(phoneNumber,Message){
+     this.sms.send(phoneNumber,Message).then(() => {
         this.sent_Messages++;
         this.finished_Messages++;
         console.log('http:///s');
-        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/s').toPromise()
+        this.result=1;
+        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/s').toPromise()
         .then((data:any)=> { 
          });
         }, () => {
         this.failed_Messages++;
         this.finished_Messages++;
         console.log('http:///x');
-        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/x').toPromise()
+        this.result=1;
+        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/x').toPromise()
         .then((data:any)=> { 
           });
         });
-      }
-      if (this.total_Messages>0){
-        this.showSending();
-      }
+    this.startSendInterval();
   }
 
 }
