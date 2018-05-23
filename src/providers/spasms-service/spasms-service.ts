@@ -82,7 +82,7 @@ startErrorInterval(){
 startCheckerInterval(){
       this.checker_interval = setInterval(() => {
         console.log("check")
-          if (this.finished_Messages==this.total_Messages){
+          if (this.finished_Messages==20){
             this.clearCheckerInterval();
             this.showFinished();
             this.p=0;
@@ -109,19 +109,7 @@ startFinishInterval(){
     console.log("clearRef");
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
-    // setTimeout(() => { 
-    //   for (; this.finished_Messages<=this.total_Messages;) {
-    //     if (this.finished_Messages==this.total_Messages){
-    //       this.showFinished();
-    //   }else{}
-    // };}, 2000); 
   }
-  
-
-  // presentCompleteModal() {
-  //   let completeModal = this.modalCtrl.create(CompleteModal);
-  //   completeModal.present();
-  // }
 
   finishTimeout(){
     this.finish=setTimeout(() => { 
@@ -257,7 +245,12 @@ startFinishInterval(){
     }
   },error=>{
   console.log("error called")
-  this.showError();})
+  if (this.p==0){
+  this.showError();}
+  else{
+    console.log("cant retrieve messages");
+  }
+  })
   //
   }
 
@@ -268,17 +261,17 @@ startFinishInterval(){
     this.status="";
   
     this.total_Messages=this.id.length;
-    for (let i=0; i<this.total_Messages; i++) {
+    for (let i=0; i<20; i++) {
       phoneNumber=this.receiver[i];
       Message=this.message[i];
-      this.sms.send(phoneNumber,Message).then((result) => {
+      this.sms.send(phoneNumber,Message).then(() => {
         this.sent_Messages++;
         this.finished_Messages++;
         console.log('http:///s');
         this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/s').toPromise()
         .then((data:any)=> { 
          });
-        }, (error) => {
+        }, () => {
         this.failed_Messages++;
         this.finished_Messages++;
         console.log('http:///x');
@@ -286,13 +279,6 @@ startFinishInterval(){
         .then((data:any)=> { 
           });
         });
-        // console.log(this.sent_Messages);
-        // console.log(this.failed_Messages);
-        // console.log(this.total_Messages);
-        // console.log(this.finished_Messages);     
-        // console.log(this.failed_Messages);  
-        // console.log("status" + this.status + "hello");
-        //  console.log('http://192.168.1.119/api/spasms/updateStats/'+this.id[i]+'/'+this.status);
       }
       if (this.total_Messages>0){
         this.showSending();
