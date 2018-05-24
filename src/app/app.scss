@@ -87,6 +87,10 @@ modal-wrapper {
 	height:32vh;
 }
 
+.nomargin{
+  margin:2vw;
+}
+
 .progress{
 	height:3vw;
 	width:75%;
@@ -177,6 +181,20 @@ margin-top:3vw;
 
 .red{
   background-color:#fc5c65;
+}
+
+.green2{
+  border: 2px solid #26de81;
+  padding-top:1vw;
+   padding-bottom:1vw;
+   border-radius: 8px;
+}
+
+.red2{
+   border: 2px solid #fc5c65;
+   padding-top:1vw;
+   padding-bottom:1vw;
+   border-radius: 8px;
 }
 
 // App Global Sass
