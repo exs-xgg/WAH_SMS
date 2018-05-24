@@ -88,12 +88,6 @@ startCheckerInterval(){
             this.clearCheckerInterval();
             this.showFinished();
             this.p=0;
-    this.temp_Address="";
-    this.total_Daily_Messages=0;
-    this.failed_Messages=0;
-    this.sent_Messages=0;
-    this.finished_Messages=0;
-    this.total_Messages=0;
           }
        }, 3000);
 }          
@@ -112,12 +106,13 @@ startSendInterval(){
       this.Sender();
       this.clearSendInterval();
     }
-  }, 1000);
+  }, 500);
 }   
 
 clearSendInterval(){
   clearTimeout(this.send_interval);
 }
+
   showSending(){
     console.log("sending called");
     this.startCheckerInterval();
@@ -307,17 +302,17 @@ clearSendInterval(){
         this.finished_Messages++;
         console.log('http:///s');
         this.result=1;
-        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/s').toPromise()
-        .then((data:any)=> { 
-         });
+        // this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/s').toPromise()
+        // .then((data:any)=> { 
+        //  });
         }, () => {
         this.failed_Messages++;
         this.finished_Messages++;
         console.log('http:///x');
         this.result=1;
-        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/x').toPromise()
-        .then((data:any)=> { 
-          });
+        // this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/x').toPromise()
+        // .then((data:any)=> { 
+        //   });
         });
     this.startSendInterval();
   }
