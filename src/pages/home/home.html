@@ -46,10 +46,6 @@
     <br>
     <h5>SPASMS is waiting for new messages <br>from server at {{service.ip_Address}}</h5> 
     
-   <!--  <button ion-button icon-left class="stop" (click)="service.showStopped()">
-      <ion-icon name="square"></ion-icon>
-      Stop
-    </button> -->
   </div>
 
   <div id="ipChange" class="hidden">
@@ -63,11 +59,11 @@
     </div>
     <br>
     <br>
-    <button ion-button icon-left class="change" (click)="service.onIpCancel()"> 
+    <button ion-button icon-left class="change red" (click)="service.onIpCancel()"> 
       <ion-icon name="done-all"></ion-icon>
       Cancel
     </button>
-    <button ion-button icon-left class="change" (click)="service.onIpSave()"> 
+    <button ion-button icon-left class="change green" (click)="service.onIpSave()"> 
       <ion-icon name="done-all"></ion-icon>
       Save
     </button>
