@@ -86,12 +86,11 @@
   <div id="finished">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsfinished.png">
     <h4>SPASMS has set {{service.total_Messages}} messages<br> in this session!</h4>
-    <h6>Sent Messages: {{service.sent_Messages}} messages</h6>
-    <h6>Failed Messages: {{service.failed_Messages}} messages </h6>
-    <h6>Waiting for new messages in {{service.timer2}} second/s...</h6>
+    <h5 class="nomargin green2">Sent Messages: {{service.sent_Messages}} messages</h5>
+    <h5 class="nomargin red2">Failed Messages: {{service.failed_Messages}} messages </h5>
     <button ion-button icon-left (click)="service.onBack()">
       <ion-icon name="done-all" ></ion-icon>
-      Back
+      Back {{service.timer2}}
     </button>
   </div>
 
