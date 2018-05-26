@@ -22,7 +22,7 @@ import { SpasmsServiceProvider } from '../providers/spasms-service/spasms-servic
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{scrollPadding: false})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
