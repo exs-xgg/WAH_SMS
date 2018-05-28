@@ -2,7 +2,7 @@
   <ion-navbar color="secondary">
     <img class="logo" alt="wah logo" src="assets/imgs/wah.png">
     <ion-title class="titleText">
-    WAH-SPASMS</ion-title>
+    WAH-4P</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -45,6 +45,7 @@
     <br>
     <br>
     <h5>SPASMS is waiting for new messages <br>from server at {{service.ip_Address}}</h5> 
+    <h6>{{service.log}}</h6>
     
   </div>
 
@@ -75,7 +76,9 @@
  
     <img class="progress" alt="spasms animation" src="assets/imgs/progressbar.gif">
     <h6>{{service.finished_Messages}} out of {{service.total_Messages}} finished</h6>
-  
+    <div id="disconnected" class="hidden">
+      <h6>The server cannot be reached</h6>
+    </div>
     <br>
    <!--  <button ion-button icon-left class="stop" (click)="service.showStopped()">
       <ion-icon name="square" ></ion-icon>
@@ -90,7 +93,7 @@
     <h5 class="nomargin red2">Failed Messages: {{service.failed_Messages}} messages </h5>
     <button ion-button icon-left (click)="service.onBack()">
       <ion-icon name="done-all" ></ion-icon>
-      Back {{service.timer2}}
+      Back ({{service.timer2}})
     </button>
   </div>
 
