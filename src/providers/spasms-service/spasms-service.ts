@@ -34,6 +34,7 @@ export class SpasmsServiceProvider {
   test;
   m=1;
   log="start";
+  progress=0;
 
   refresh_interval:any;
   error_interval:any;
@@ -255,7 +256,9 @@ clearSendInterval(){
 
   doIt(){
     this.test=setTimeout(() => { 
+      console.log("doIt called" + this.m)
       if (this.m==1&&this.p==0){
+      this.log="doIt validated" + this.m;
       this.m=0;
       this.getMessages();
       this.getLGU();}}, 5000);   
@@ -272,7 +275,7 @@ clearSendInterval(){
       var message_quantity=[];
       message_quantity=data;
       console.log("message quantity"+ message_quantity);
-      this.log="message quantity" + message_quantity;
+      this.log="message quantity" + this.m;
       if (message_quantity.length!=0){
         this.showSending();
         var k=0;
@@ -284,8 +287,11 @@ clearSendInterval(){
           k++;
         };   
       this.Sender();
-      }else{
-        this.doIt();
+      // }else{
+        
+      //   this.log="doIt called inside" + this.m;
+      //   console.log("doIt called inside" + this.m)
+      //   this.doIt();
       }
   },error=>{
     this.m=1;
@@ -299,8 +305,10 @@ clearSendInterval(){
     this.log="cant retrieve messages " + this.m;
   }
   })
+  this.log="doIt called outside" + this.m;
+  console.log("doIt called outside" + this.m);
   this.doIt();
-  //
+  
   }
 
   Sender(){
@@ -337,6 +345,7 @@ clearSendInterval(){
   Update(){
     this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/'+this.status).toPromise()
     .then((data:any)=> {
+      document.getElementById('disconnected').style.display = "none";
       this.update=1;
       this.counter=0;
      },()=>{
@@ -348,6 +357,7 @@ clearSendInterval(){
   notUpdate(){
     this.counter++;
     if (this.counter<5){
+      this.counter=5;
       document.getElementById('disconnected').style.display = "block";
     }
     this.Update();
@@ -357,6 +367,9 @@ clearSendInterval(){
      this.sms.send(phoneNumber,Message).then(() => {
         this.sent_Messages++;
         this.finished_Messages++;
+        var tempProgress=this.finished_Messages/this.total_Messages*100;
+       
+        this.progress=parseInt(tempProgress.toFixed(0));
         console.log('http:///s');
         this.result=1;
         this.status='s';
@@ -364,6 +377,9 @@ clearSendInterval(){
         }, () => {
         this.failed_Messages++;
         this.finished_Messages++;
+        var tempProgress=this.finished_Messages/this.total_Messages*100;
+        
+        this.progress=parseInt(tempProgress.toFixed(0));
         console.log('http:///x');
         this.result=1;
         this.status='x';

@@ -74,7 +74,11 @@
     <img class="animation" alt="spasms animation" src="assets/imgs/smssending.gif">
     <h5>SPASMS is sending messages</h5>
  
-    <img class="progress" alt="spasms animation" src="assets/imgs/progressbar.gif">
+    <div class="progress-outer">
+      <div class="progress-inner" [style.width]="service.progress + '%'">
+          {{service.progress}}%
+      </div>
+    </div>
     <h6>{{service.finished_Messages}} out of {{service.total_Messages}} finished</h6>
     <div id="disconnected" class="hidden">
       <h6>The server cannot be reached</h6>
