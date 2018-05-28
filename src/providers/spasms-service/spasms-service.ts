@@ -16,6 +16,8 @@ export class SpasmsServiceProvider {
 
   Json;
   LGU_name="";
+  update=0;
+  counter=0;
   total_Messages=0;
   total_Daily_Messages=0;
   failed_Messages=0;
@@ -29,6 +31,9 @@ export class SpasmsServiceProvider {
   p;
   i=0;
   result=0;
+  test;
+  m=1;
+  log="start";
 
   refresh_interval:any;
   error_interval:any;
@@ -50,9 +55,9 @@ export class SpasmsServiceProvider {
             ) {}
  
 
-clearRefreshInterval(){
-  clearInterval(this.refresh_interval);
-}
+// clearRefreshInterval(){
+//   clearInterval(this.refresh_interval);
+// }
 
 clearErrorInterval(){
   clearInterval(this.error_interval);
@@ -66,14 +71,14 @@ clearFinishInterval(){
   clearInterval(this.finish_interval);
 }
 
-startRefreshInterval(){
-  this.refresh_interval = setInterval(() => {
-    if (this.p==0){
-      this.getMessages();
-      this.getLGU();
-    }
-  }, 5000);
-}          
+// startRefreshInterval(){
+//   this.refresh_interval = setInterval(() => {
+//     if (this.p==0){
+//       this.getMessages();
+//       this.getLGU();
+//     }
+//   }, 5000);
+// }          
 
 startErrorInterval(){
   this.error_interval = setInterval(() => {
@@ -100,8 +105,9 @@ startFinishInterval(){
 
 startSendInterval(){
   this.send_interval = setInterval(() => {
-    if (this.result==1){
+    if (this.result==1&&this.update==1){
       this.result=0;
+      this.update=0;
       this.i++;
       this.Sender();
       this.clearSendInterval();
@@ -117,7 +123,7 @@ clearSendInterval(){
     this.p=1;
     console.log("sending called");
     this.startCheckerInterval();
-    this.clearRefreshInterval();
+   // this.clearRefreshInterval();
     console.log("clearRef");
     document.getElementById('standby').style.display = "none";
     document.getElementById('sending').style.display = "block";
@@ -134,6 +140,7 @@ clearSendInterval(){
   }
 
   showFinished(){
+    this.p=1;
     this.clearCheckerInterval();
     console.log("finish called")
     this.startFinishInterval();
@@ -148,6 +155,8 @@ clearSendInterval(){
   showStandby(){
     this.p=0;
     this.i=0;
+    this.m=1;
+    this.log="standby called " + this.m;
     this.temp_Address="";
     this.total_Daily_Messages=0;
     this.failed_Messages=0;
@@ -162,8 +171,7 @@ clearSendInterval(){
     document.getElementById('finished').style.display ="none";
     document.getElementById('stopped').style.display ="none";
     document.getElementById('standby').style.display = "block";
-    this.startRefreshInterval();
-    console.log("startrefresh");
+   this.doIt();
     console.log("standby called")
   }
 
@@ -177,10 +185,10 @@ clearSendInterval(){
   showError(){
     this.p=1;
     console.log("error called")
-    this.clearRefreshInterval();
+    //this.clearRefreshInterval();
     console.log("clearRef");
     this.timer=5;
-    this.clearRefreshInterval();
+    //this.clearRefreshInterval();
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display = "none";
     document.getElementById('standby').style.display = "none";
@@ -212,8 +220,8 @@ clearSendInterval(){
   }
 
   onIpChange(){
-    this.clearRefreshInterval();
-    console.log("clearRefresh");
+    //this.clearRefreshInterval();
+    //console.log("clearRefresh");
     this.p=1;
     document.getElementById('sending').style.display = "none";
     document.getElementById('finished').style.display = "none";
@@ -245,14 +253,26 @@ clearSendInterval(){
   },error=>console.log("Cannot retrieve RHU name")
   )}
 
+  doIt(){
+    this.test=setTimeout(() => { 
+      if (this.m==1&&this.p==0){
+      this.m=0;
+      this.getMessages();
+      this.getLGU();}}, 5000);   
+  }
+
   getMessages(){
     console.log("getMessages");
+    this.log="getMessages " + this.m;
     //this.http.get('../../assets/sample.json').toPromise()
     this.http.get('http://'+ this.ip_Address +'/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
+      this.m=1;
+      this.log="getMessages showSMS" + this.m;
       var message_quantity=[];
       message_quantity=data;
-      console.log("message quantity"+message_quantity);
+      console.log("message quantity"+ message_quantity);
+      this.log="message quantity" + message_quantity;
       if (message_quantity.length!=0){
         this.showSending();
         var k=0;
@@ -263,17 +283,23 @@ clearSendInterval(){
           this.message[k]=i.msg;
           k++;
         };   
-    this.Sender();
-    }
+      this.Sender();
+      }else{
+        this.doIt();
+      }
   },error=>{
-
+    this.m=1;
+    this.log="getMessages showSMS error" + this.m;
+    this.log="error";
   if (this.p==0){
   this.showError();}
   else{
-    this.clearRefreshInterval();
+    //this.clearRefreshInterval();
     console.log("cant retrieve messages");
+    this.log="cant retrieve messages " + this.m;
   }
   })
+  this.doIt();
   //
   }
 
@@ -308,23 +334,43 @@ clearSendInterval(){
      
   }
 
+  Update(){
+    this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/'+this.status).toPromise()
+    .then((data:any)=> {
+      this.update=1;
+      this.counter=0;
+     },()=>{
+       this.notUpdate();
+     }
+    );
+  }
+
+  notUpdate(){
+    this.counter++;
+    if (this.counter<5){
+      document.getElementById('disconnected').style.display = "block";
+    }
+    this.Update();
+  }
+
   Send(phoneNumber,Message){
      this.sms.send(phoneNumber,Message).then(() => {
         this.sent_Messages++;
         this.finished_Messages++;
         console.log('http:///s');
         this.result=1;
-        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/s').toPromise()
-        .then((data:any)=> { 
-         });
+        this.status='s';
+        this.Update();
         }, () => {
         this.failed_Messages++;
         this.finished_Messages++;
         console.log('http:///x');
         this.result=1;
-        this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/x').toPromise()
-        .then((data:any)=> { 
-          });
+        this.status='x';
+        this.Update();
+        // this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/x').toPromise()
+        // .then((data:any)=> { 
+        //   });
         });
     this.startSendInterval();
   }
