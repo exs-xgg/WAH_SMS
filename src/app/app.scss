@@ -91,11 +91,6 @@ modal-wrapper {
   margin:2vw;
 }
 
-.progress{
-	height:3vw;
-	width:75%;
-}
-
 .start{
 	background-color:#26de81;
 	font-size:4vh;
@@ -133,7 +128,6 @@ margin-top:3vw;
 
 .scroll-content{
 	margin-top:15vw !important;
-	height:80vh !important;
 }
 
 .searchbar{
@@ -202,8 +196,7 @@ margin-top:3vw;
         margin: 10px 2%;
         padding: 3px;
         text-align: center;
-        background-color: #f4f4f4;
-        border: 1px solid #dcdcdc;
+        border: 2px solid #8c7ae6;
         color: #fff;
         border-radius: 20px;
     }
