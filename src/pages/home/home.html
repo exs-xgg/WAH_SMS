@@ -2,7 +2,7 @@
   <ion-navbar color="secondary">
     <img class="logo" alt="wah logo" src="assets/imgs/wah.png">
     <ion-title class="titleText">
-    WAH-4P</ion-title>
+    WAH-4Patients</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
 
   <div id="stopped" class="hidden">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsstopped.png">
-    <h5>SPASMS service has stopped</h5>
+    <h5>WAH-4P service has stopped</h5>
     <h6>please press the Start button to <br>resume the service</h6>
     <br>
     <button ion-button icon-left class="start" (click)="showError()">
@@ -24,7 +24,7 @@
 
   <div id="error" class="hidden">
     <img class="animation" alt="spasms animation" src="assets/imgs/smserror.png">
-    <h5>Error! SPASMS cannot connect to the<br> server at {{service.ip_Address}}</h5>
+    <h5>Error! WAH-4P cannot connect to the<br> server at {{service.ip_Address}}</h5>
     <h6>Retrying in {{service.timer}} seconds...</h6>
     <br>
   </div>
@@ -44,8 +44,7 @@
     <br>
     <br>
     <br>
-    <h5>SPASMS is waiting for new messages <br>from server at {{service.ip_Address}}</h5> 
-    <h6>{{service.log}}</h6>
+    <h5>WAH-4P is waiting for new messages <br>from server at {{service.ip_Address}}</h5> 
     
   </div>
 
@@ -72,7 +71,7 @@
 
   <div id="sending" class="hidden">
     <img class="animation" alt="spasms animation" src="assets/imgs/smssending.gif">
-    <h5>SPASMS is sending messages</h5>
+    <h5>WAH-4P is sending messages</h5>
  
     <div class="progress-outer">
       <div class="progress-inner" [style.width]="service.progress + '%'">
@@ -92,7 +91,7 @@
 
   <div id="finished">
     <img class="animation" alt="spasms animation" src="assets/imgs/smsfinished.png">
-    <h4>SPASMS has set {{service.total_Messages}} messages<br> in this session!</h4>
+    <h4>WAH-4P has set {{service.total_Messages}} messages<br> in this session!</h4>
     <h5 class="nomargin green2">Sent Messages: {{service.sent_Messages}} messages</h5>
     <h5 class="nomargin red2">Failed Messages: {{service.failed_Messages}} messages </h5>
     <button ion-button icon-left (click)="service.onBack()">
