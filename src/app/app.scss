@@ -80,22 +80,36 @@ modal-wrapper {
 }
 
 .LGU{
-	font-size:7vw !important;
+	font-size:6.5vw;
 }
 
 .animation{
 	height:32vh;
 }
 
-.progress{
-	height:3vw;
-	width:75%;
+.nomargin{
+  margin:2vw;
 }
 
 .start{
 	background-color:#26de81;
 	font-size:4vh;
 	height:8vh;
+}
+
+.ip{
+  width:50vw;
+  margin-top:2vw !important;
+}
+
+.change{
+margin-top:3vw;
+  width:30vw; 
+}
+
+.card2{
+  width:50vw;
+  border: 1px solid #000000;
 }
 
 .stop{
@@ -110,11 +124,11 @@ modal-wrapper {
 
 .logo{
 	height:12vw;
+  margin-top:2vw;
 }
 
 .scroll-content{
 	margin-top:15vw !important;
-	height:80vh !important;
 }
 
 .searchbar{
@@ -154,6 +168,51 @@ modal-wrapper {
 
 .hidden{
 	display:none;
+}
+
+.green{
+  background-color:#26de81;
+}
+
+.red{
+  background-color:#fc5c65;
+}
+
+.green2{
+  border: 2px solid #26de81;
+  padding-top:1vw;
+   padding-bottom:1vw;
+   border-radius: 8px;
+}
+
+.red2{
+   border: 2px solid #fc5c65;
+   padding-top:1vw;
+   padding-bottom:1vw;
+   border-radius: 8px;
+}
+
+ .progress-outer {
+        width: 96%;
+        margin: 10px 2%;
+        padding: 3px;
+        text-align: center;
+        border: 2px solid #8c7ae6;
+        color: #fff;
+        border-radius: 20px;
+    }
+ 
+    .progress-inner {
+        min-width: 1%;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 5px;
+        border-radius: 20px;
+        background-color: map-get($colors, primary);
+    }
+
+.redtext{
+  color:#fc5c65;
 }
 
 // App Global Sass
