@@ -124,6 +124,7 @@ margin-top:3vw;
 
 .logo{
 	height:12vw;
+  margin-top:2vw;
 }
 
 .scroll-content{
@@ -209,6 +210,10 @@ margin-top:3vw;
         border-radius: 20px;
         background-color: map-get($colors, primary);
     }
+
+.redtext{
+  color:#fc5c65;
+}
 
 // App Global Sass
 // --------------------------------------------------
