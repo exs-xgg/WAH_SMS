@@ -154,6 +154,7 @@ clearSendInterval(){
   }
 
   showStandby(){
+    this.progress=0;
     this.p=0;
     this.i=0;
     this.m=1;
@@ -287,11 +288,10 @@ clearSendInterval(){
           k++;
         };   
       this.Sender();
-      // }else{
-        
-      //   this.log="doIt called inside" + this.m;
-      //   console.log("doIt called inside" + this.m)
-      //   this.doIt();
+      }else{
+        this.log="doIt called inside" + this.m;
+        console.log("doIt called inside" + this.m)
+        this.doIt();
       }
   },error=>{
     this.m=1;
@@ -368,7 +368,7 @@ clearSendInterval(){
         this.sent_Messages++;
         this.finished_Messages++;
         var tempProgress=this.finished_Messages/this.total_Messages*100;
-       
+
         this.progress=parseInt(tempProgress.toFixed(0));
         console.log('http:///s');
         this.result=1;
