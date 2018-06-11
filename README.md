@@ -23,3 +23,5 @@ WAH_SMS
   $ ionic cordova build android --prod
   
   Unsigned app will be saved on *\platforms\android\app\build\outputs\apk\debug\app-debug.apk
+  
+  Reference: https://ionicframework.com/docs/
