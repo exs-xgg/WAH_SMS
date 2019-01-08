@@ -1,3 +1,10 @@
+Prerequisites:
+NPM
+GIT
+Visual Studio 2013+
+.Net Framework
+
+
 WAH_SMS
 
   Most of the tooling in the CLI is based on Node and is managed through npm. The quickest way to get Node and NPM installed on your machine is through the NodeJS installer. Be sure to install the LTS version of Node. Close any terminals/command prompts you may have open, run the installer, and launch a new terminal window. To verify you have everything installed correctly, you can run npm --version and node --version. If this errors, please resolve before moving on.
