@@ -1,8 +1,8 @@
 {
   "name": "WAH-SPASMS",
-  "app_id": "756228fb",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "id": "756228fb"
 }

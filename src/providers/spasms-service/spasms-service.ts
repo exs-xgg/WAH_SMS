@@ -26,7 +26,7 @@ export class SpasmsServiceProvider {
   id: any = [];
   receiver: any = [];
   message: any = [];
-  ip_Address="192.168.1.100";
+  ip_Address="192.168.0.100";
   temp_Address="";
   p;
   i=0;
