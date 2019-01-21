@@ -235,7 +235,7 @@ clearSendInterval(){
 
   getLGU(){
     //this.http.get('../../assets/RHU.json').toPromise()
-    this.http.get('http://'+ this.ip_Address +'/api/spasms/getRHU').toPromise()
+    this.http.get('https://'+ this.ip_Address +'/api/spasms/getRHU').toPromise()
     .then((data:any)=> { 
       var LGU=[];
       LGU=data;
@@ -269,7 +269,7 @@ clearSendInterval(){
     console.log("getMessages");
     this.log="getMessages " + this.m;
     //this.http.get('../../assets/sample.json').toPromise()
-    this.http.get('http://'+ this.ip_Address +'/api/spasms/showSms').toPromise()
+    this.http.get('https://'+ this.ip_Address +'/api/spasms/showSms').toPromise()
     .then((data:any)=> { 
       this.m=1;
       this.log="getMessages showSMS" + this.m;
@@ -326,15 +326,15 @@ clearSendInterval(){
       // this.sms.send(phoneNumber,Message).then(() => {
       //   this.sent_Messages++;
       //   this.finished_Messages++;
-      //   console.log('http:///s');
-      //   this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/s').toPromise()
+      //   console.log('https:///s');
+      //   this.http.get('https://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/s').toPromise()
       //   .then((data:any)=> { 
       //    });
       //   }, () => {
       //   this.failed_Messages++;
       //   this.finished_Messages++;
-      //   console.log('http:///x');
-      //   this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/x').toPromise()
+      //   console.log('https:///x');
+      //   this.http.get('https://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[i]+'/x').toPromise()
       //   .then((data:any)=> { 
       //     });
       //   });
@@ -343,7 +343,7 @@ clearSendInterval(){
   }
 
   Update(){
-    this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/'+this.status).toPromise()
+    this.http.get('https://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/'+this.status).toPromise()
     .then((data:any)=> {
       document.getElementById('disconnected').style.display = "none";
       this.update=1;
@@ -370,7 +370,7 @@ clearSendInterval(){
         var tempProgress=this.finished_Messages/this.total_Messages*100;
 
         this.progress=parseInt(tempProgress.toFixed(0));
-        console.log('http:///s');
+        console.log('https:///s');
         this.result=1;
         this.status='s';
         this.Update();
@@ -380,11 +380,11 @@ clearSendInterval(){
         var tempProgress=this.finished_Messages/this.total_Messages*100;
         
         this.progress=parseInt(tempProgress.toFixed(0));
-        console.log('http:///x');
+        console.log('https:///x');
         this.result=1;
         this.status='x';
         this.Update();
-        // this.http.get('http://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/x').toPromise()
+        // this.http.get('https://'+ this.ip_Address +'/api/spasms/updateStats/'+this.id[this.i]+'/x').toPromise()
         // .then((data:any)=> { 
         //   });
         });
