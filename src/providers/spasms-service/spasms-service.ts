@@ -356,8 +356,8 @@ clearSendInterval(){
 
   notUpdate(){
     this.counter++;
-    if (this.counter<5){
-      this.counter=5;
+    if (this.counter<1){
+      this.counter=1;
       document.getElementById('disconnected').style.display = "block";
     }
     this.Update();
