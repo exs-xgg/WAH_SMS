@@ -1,6 +1,7 @@
+  /* tslint:disable:no-unused-variable */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ModalController, NavParams,NavController } from 'ionic-angular';
+import { ModalController, NavParams, NavController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { SMS } from '@ionic-native/sms';
@@ -52,7 +53,7 @@ export class SpasmsServiceProvider {
   constructor(public modalCtrl: ModalController,
               public http: HttpClient,
               private sms: SMS,
-              private navCtrl:NavController
+              public navCtrl:NavController
             ) {}
  
 
@@ -113,7 +114,7 @@ startSendInterval(){
       this.Sender();
       this.clearSendInterval();
     }
-  }, 500);
+  }, 1);
 }   
 
 clearSendInterval(){
