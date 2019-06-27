@@ -1,6 +1,7 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+#E:\WAH Files\source_codes\WAH_SMS\platforms\android\app\build\outputs\apk\debug\app-debug.apk
 *~
 *.sw[mnpcod]
 *.log
